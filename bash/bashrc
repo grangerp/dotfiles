@@ -24,7 +24,7 @@ SSHUTTLE_EXECUTABLE=/usr/local/bin/sshuttle
 
 function vcprompt() {
   if [ -e "$VCPROMPT_EXECUTABLE" ]; then
-    $VCPROMPT_EXECUTABLE -f $' on \033[1;34m%n\033[00;1m:\033[0;37m%[unknown]b\033[32;1m%m%u'
+    $VCPROMPT_EXECUTABLE -f $' on \033[1;34m%n\033[00;1m:\033[0;37m%b\033[32;1m%m%u'
   fi
 }
 
