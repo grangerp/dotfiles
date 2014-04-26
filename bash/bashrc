@@ -221,9 +221,9 @@ fi;
 
 [[ -s ~/.rvm/scripts/rvm ]] && source ~/.rvm/scripts/rvm  # This loads RVM into a shell session.
 
-export CHEF_USER=zeeg
+#export CHEF_USER=zeeg
 
 # AWS tooling
-export EC2_HOME="/usr/local/Cellar/ec2-api-tools/1.6.12.0/libexec"
-export JAVA_HOME="$(/usr/libexec/java_home)"
-export AWS_RDS_HOME="/usr/local/Cellar/rds-command-line-tools/1.12.002/libexec"
+#export EC2_HOME="/usr/local/Cellar/ec2-api-tools/1.6.12.0/libexec"
+#export JAVA_HOME="$(/usr/libexec/java_home)"
+#export AWS_RDS_HOME="/usr/local/Cellar/rds-command-line-tools/1.12.002/libexec"
