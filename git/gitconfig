@@ -1,9 +1,10 @@
 [github]
-  user = dcramer
+  user = grangerp
 
 [user]
-  name = David Cramer
-  email = dcramer@gmail.com
+  email = pgranger@w.illi.am
+  name = Philippe Granger
+
 
 [color]
   ui = auto
