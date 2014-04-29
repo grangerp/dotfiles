@@ -1,5 +1,5 @@
 install: install-bash install-virtualenvwrapper install-pythonrc \
-		 install-subl install-bin install-vcprompt install-git install-hg
+		 install-subl install-bin install-vcprompt install-git install-hg install-tmux
 
 install-vcprompt:
 	@rm -rf /tmp/vcprompt
@@ -28,6 +28,9 @@ install-bash:
 install-virtualenvwrapper:
 	mkdir -p ~/.virtualenvs/
 	ln -fs `pwd`/virtualenvwrapper/* ~/.virtualenvs/
+
+install-tmux:
+	ln -fs `pwd`/tmux/.tmux.conf ~/.tmux.conf
 
 install-pythonrc:
 	ln -fs `pwd`/python/pythonrc.py ~/.pythonrc.py
