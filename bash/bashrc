@@ -58,12 +58,6 @@ function activevirtualenv() {
   fi
 }
 
-# export BASEPROMPT='\e${USER_COLOR}\u \
-# \e${GRAY_COLOR}at \e${ORANGE_COLOR}\h \
-# \e${GRAY_COLOR}$(vcprompt)\
-# \e${GRAY_COLOR}in \e${GREEN_COLOR}\w\
-# `backgroundjobs`\
-# \e${DEFAULT_COLOR}'
 export BASEPROMPT='\n\e${USER_COLOR}\u\
 `activevirtualenv` \
 \e${GRAY_COLOR}in \e${GREEN_COLOR}\w\
@@ -81,7 +75,6 @@ if [ `uname` == "Darwin" ]; then
 else
   export BASEPROMPT='\n\e${USER_COLOR}\u\
 `activevirtualenv` \
-\e${GRAY_COLOR}at \e${ORANGE_COLOR}\h \
 \e${GRAY_COLOR}in \e${GREEN_COLOR}\w\
 \e${GRAY_COLOR}`vcprompt`\
 `backgroundjobs`\
