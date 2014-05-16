@@ -220,3 +220,27 @@ fi;
 #export EC2_HOME="/usr/local/Cellar/ec2-api-tools/1.6.12.0/libexec"
 #export JAVA_HOME="$(/usr/libexec/java_home)"
 #export AWS_RDS_HOME="/usr/local/Cellar/rds-command-line-tools/1.12.002/libexec"
+
+workon_project() {
+    if [ $# -lt 1 ]
+    then
+        echo "Usage:"
+        echo -e "tworkon_project <virtualenv name>"
+        return 1
+    fi
+
+    # Create a new window.
+    tmux new-window -a -n "$1" -c "$1"
+
+    # Send keys to the bottom right pane.
+    tmux send-keys "workon $1" C-m
+    tmux send-keys "python manage.py runserver" C-m
+
+    # Split the window again, this time vertically.
+    tmux split-window -v -c "$1"
+    
+    # Send keys to the large pane on the left.
+    tmux send-keys "workon $1" C-m
+    tmux send-keys "git status" C-m
+    
+}
