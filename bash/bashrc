@@ -244,3 +244,4 @@ workon_project() {
     tmux send-keys "git status" C-m
     
 }
+source /etc/bash_completion.d/password-store
