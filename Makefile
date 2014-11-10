@@ -1,5 +1,6 @@
 install: install-bash install-virtualenvwrapper install-pythonrc \
-		 install-subl install-bin install-vcprompt install-git install-hg install-tmux
+		 install-subl install-bin install-vcprompt install-git \
+		 install-hg install-tmux install-vimrc
 
 install-vcprompt:
 	@rm -rf /tmp/vcprompt
