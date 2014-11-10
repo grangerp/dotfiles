@@ -35,6 +35,10 @@ install-tmux:
 install-pythonrc:
 	ln -fs `pwd`/python/pythonrc.py ~/.pythonrc.py
 
+install-vimrc:
+	mkdir -p ~/.vim/bundle/
+	ln -fs `pwd`/vim/.vimrc ~/.vimrc
+
 install-subl:
 ifeq ($(shell uname),Darwin)
 	ln -fs `pwd`/sublimetext3/Packages/User/* ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User/
