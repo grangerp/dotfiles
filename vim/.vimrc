@@ -55,7 +55,8 @@ Bundle 'FuzzyFinder'
 
 nmap ,f :FufFileWithCurrentBufferDir<CR>
 nmap ,b :FufBuffer<CR>
-nmap ,t :FufTaggedFile<CR>
+nmap ,t :FufCoverageFile<CR>
+" nmap ,t :FufTaggedFile<CR>
 
 
 Bundle 'davidhalter/jedi-vim'
