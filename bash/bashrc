@@ -58,12 +58,6 @@ function activevirtualenv() {
   fi
 }
 
-export BASEPROMPT='\n\e${USER_COLOR}\u\
-`activevirtualenv` \
-\e${GRAY_COLOR}in \e${GREEN_COLOR}\w\
-\e${GRAY_COLOR}$(vcprompt)\
-`backgroundjobs`\
-\e${DEFAULT_COLOR}'
 
 if [ `uname` == "Darwin" ]; then
   export BASEPROMPT='\n\e${USER_COLOR}\u\
@@ -101,10 +95,10 @@ fi
 export IGNOREEOF=1
 export LESS=FRSX
 
-export EDITOR=nano
+export EDITOR=vim
 export PYOPEN_CMD=subl
 export SVN_EDITOR=$EDITOR
-export GIT_EDITOR=$SVN_EDITOR
+export GIT_EDITOR=$EDITOR
 
 export LIBTOOLIZE=glibtoolize
 
