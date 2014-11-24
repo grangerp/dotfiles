@@ -42,6 +42,7 @@
 
 [core]
   pager = less -R
+	editor = vim
 
 [push]
   default = matching
