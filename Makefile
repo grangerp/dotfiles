@@ -1,6 +1,6 @@
 install: install-bash install-virtualenvwrapper install-pythonrc \
 		 install-subl install-bin install-vcprompt install-git \
-		 install-hg install-tmux install-vimrc install-fish
+		 install-hg install-tmux install-tmuxinator install-vimrc install-fish
 
 install-vcprompt:
 	@rm -rf /tmp/vcprompt
@@ -32,6 +32,12 @@ install-virtualenvwrapper:
 
 install-tmux:
 	ln -fs `pwd`/tmux/.tmux.conf ~/.tmux.conf
+
+install-tmuxinator:
+	sudo gem install tmuxinator
+	mkdir -p ~/.tmuxinator/
+	ln -fs `pwd`/tmuxinator/* ~/.tmuxinator/
+
 
 install-pythonrc:
 	ln -fs `pwd`/python/pythonrc.py ~/.pythonrc.py
