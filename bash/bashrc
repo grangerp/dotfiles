@@ -229,6 +229,8 @@ workon_project() {
 }
 #source /etc/bash_completion.d/password-store
 
+# tmuxinator completion
+source ~/.bin/tmuxinator.bash
 
 # powerline http://askubuntu.com/questions/283908/how-can-i-install-and-use-powerline-plugin
 #if [ -f /usr/local/lib/python2.7/dist-packages/powerline/bindings/bash/powerline.sh ]; then
