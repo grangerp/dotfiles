@@ -1,6 +1,7 @@
 install: install-bash install-virtualenvwrapper install-pythonrc \
 		 install-subl install-bin install-vcprompt install-git \
-		 install-hg install-tmux install-tmuxinator install-vimrc install-fish
+		 install-hg install-tmux install-tmuxinator install-vimrc install-fish \
+		 install-fig
 
 install-vcprompt:
 	@rm -rf /tmp/vcprompt
@@ -63,3 +64,7 @@ install-zsh:
 	[ -e ~/.oh-my-zsh ] && ln -fs `pwd`/zsh/themes/* ~/.oh-my-zsh/themes/
 	# mkdir -p ~/.zsh-extras/
 	# [ ! -e ~/.zsh-extras/zsh-autosuggestions ] && git clone git://github.com/tarruda/zsh-autosuggestions ~/.zsh-extras/zsh-autosuggestions
+
+install-fig:
+	mkdir -p ~/.fig/
+	ln -fs `pwd`/fig/* ~/.fig/
