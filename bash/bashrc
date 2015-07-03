@@ -82,7 +82,7 @@ $ "
 export PS1=$PROMPT
 
 export TERM=xterm-color
-export GREP_OPTIONS='--color=auto' GREP_COLOR='1;32'
+#export GREP_OPTIONS='--color=auto' GREP_COLOR='1;32'
 
 export CLICOLOR=1
 if [ `uname` == "Darwin" ]; then
@@ -221,11 +221,11 @@ workon_project() {
 
     # Split the window again, this time vertically.
     tmux split-window -v -c "$1"
-    
+
     # Send keys to the large pane on the left.
     tmux send-keys "workon $1" C-m
     tmux send-keys "git status" C-m
-    
+
 }
 #source /etc/bash_completion.d/password-store
 
@@ -236,3 +236,10 @@ source ~/.bin/tmuxinator.bash
 #if [ -f /usr/local/lib/python2.7/dist-packages/powerline/bindings/bash/powerline.sh ]; then
 #    source /usr/local/lib/python2.7/dist-packages/powerline/bindings/bash/powerline.sh
 #fi
+
+NPM_PACKAGES="${HOME}/.npm-packages"
+NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
+PATH="$NPM_PACKAGES/bin:$PATH"
+unset MANPATH # delete if you already modified MANPATH elsewhere in your config
+MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
+
