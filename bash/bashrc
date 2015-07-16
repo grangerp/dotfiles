@@ -77,9 +77,7 @@ fi
 
 export ARCHFLAGS='-arch i386 -arch x86_64'
 
-export PROMPT="${BASEPROMPT}
-$ "
-export PS1=$PROMPT
+
 
 export TERM=xterm-color
 #export GREP_OPTIONS='--color=auto' GREP_COLOR='1;32'
@@ -233,13 +231,16 @@ workon_project() {
 source ~/.bin/tmuxinator.bash
 
 # powerline http://askubuntu.com/questions/283908/how-can-i-install-and-use-powerline-plugin
-#if [ -f /usr/local/lib/python2.7/dist-packages/powerline/bindings/bash/powerline.sh ]; then
-#    source /usr/local/lib/python2.7/dist-packages/powerline/bindings/bash/powerline.sh
+#if [ -f /usr/share/powerline/bash/powerline.sh ]; then
+#    source /usr/share/powerline/bash/powerline.sh
 #fi
+
+export PROMPT="${BASEPROMPT}
+$ "
+export PS1=$PROMPT
 
 NPM_PACKAGES="${HOME}/.npm-packages"
 NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
 PATH="$NPM_PACKAGES/bin:$PATH"
 unset MANPATH # delete if you already modified MANPATH elsewhere in your config
 MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
-
