@@ -1,6 +1,25 @@
 set nocompatible
 filetype off
 
+" vim options "
+" search option "
+:set incsearch
+:set hlsearch
+
+"by default Vim saves your last 8 commands.
+set history=100 
+
+set number
+
+" Make backspace behave in a sane manner.
+set backspace=indent,eol,start
+
+" Switch syntax highlighting on
+syntax on
+
+" Allow hidden buffers, don't limit to 1 file per window/split
+set hidden
+
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
@@ -32,6 +51,7 @@ map <F2> :NERDTreeToggle<CR>
 Bundle 'klen/python-mode'
 " disable rope (autocomplete)
 let g:pymode_rope = 0
+let g:pymode_options_max_line_length = 100
 
 "Linting
 let g:pymode_lint = 1
@@ -62,4 +82,7 @@ nmap ,t :FufCoverageFile<CR>
 
 
 Bundle 'davidhalter/jedi-vim'
+
+Bundle 'fisadev/vim-isort'
+
 
