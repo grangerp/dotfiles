@@ -85,4 +85,4 @@ Bundle 'davidhalter/jedi-vim'
 
 Bundle 'fisadev/vim-isort'
 
-
+Bundle 'shime/vim-livedown'
