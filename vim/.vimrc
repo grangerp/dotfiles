@@ -37,7 +37,7 @@ filetype plugin indent on
 
 " PowerLine
 Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
-"set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 9
+set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 9
 set laststatus=2
 
 " git, fugitive
@@ -50,7 +50,8 @@ map <F2> :NERDTreeToggle<CR>
 " python mode
 Bundle 'klen/python-mode'
 " disable rope (autocomplete)
-" let g:pymode_rope = 0
+let g:pymode_rope = 0
+let g:pymode_folding=0
 let g:pymode_options_max_line_length = 100
 
 "Linting
@@ -82,6 +83,8 @@ nmap ,t :FufCoverageFile<CR>
 
 
 Bundle 'davidhalter/jedi-vim'
+let g:jedi#popup_on_dot = 1
+let g:jedi#use_tabs_not_buffers = 1
 
 Bundle 'fisadev/vim-isort'
 
