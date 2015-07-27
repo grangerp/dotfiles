@@ -159,9 +159,15 @@ function ghettovpn() {
   $SSHUTTLE_EXECUTABLE -r "$VPN_HOST" 10/8
 }
 
+function cleanswp() {
+  find . -name "*.swp" -exec rm -rf {} \;
+
+}
 function cleanpycs() {
   find . -name "*.pyc" -exec rm -rf {} \;
 }
+
+
 
 function tfree() {
   top -l1 -s0 | head -n11
