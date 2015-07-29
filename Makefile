@@ -8,7 +8,7 @@ install-pip:
 	sudo pip install pip -U
 
 install-powerline:
-	pip install --user powerline-status
+	sudo pip install --user powerline-status
 
 install-vcprompt:
 	@rm -rf /tmp/vcprompt
