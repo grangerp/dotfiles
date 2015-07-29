@@ -83,10 +83,20 @@ nmap ,t :FufCoverageFile<CR>
 
 
 Bundle 'davidhalter/jedi-vim'
-let g:jedi#popup_on_dot = 1
-let g:jedi#use_tabs_not_buffers = 1
+" let g:jedi#popup_on_dot = 1
+" let g:jedi#use_tabs_not_buffers = 1
 
 Bundle 'fisadev/vim-isort'
 
 Bundle 'shime/vim-livedown'
 Bundle 'tpope/vim-surround'
+Bundle 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
