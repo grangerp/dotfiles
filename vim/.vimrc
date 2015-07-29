@@ -99,3 +99,5 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 
+" :e %% to get current dir of the file
+cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
