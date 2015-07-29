@@ -50,7 +50,7 @@ map <F2> :NERDTreeToggle<CR>
 " python mode
 Bundle 'klen/python-mode'
 " disable rope (autocomplete)
-let g:pymode_rope =1 
+let g:pymode_rope =0 
 let g:pymode_folding=0
 let g:pymode_options_max_line_length = 100
 
@@ -73,12 +73,12 @@ let g:pymode_syntax_space_errors = g:pymode_syntax_all
 let g:pymode_folding = 0
 
 " FuzzyFinder
-Bundle 'L9'
-Bundle 'FuzzyFinder'
+" Bundle 'L9'
+" Bundle 'FuzzyFinder'
 
-nmap ,f :FufFileWithCurrentBufferDir<CR>
-nmap ,b :FufBuffer<CR>
-nmap ,t :FufCoverageFile<CR>
+" nmap ,f :FufFileWithCurrentBufferDir<CR>
+" nmap ,b :FufBuffer<CR>
+" nmap ,t :FufCoverageFile<CR>
 " nmap ,t :FufTaggedFile<CR>
 
 
@@ -87,6 +87,5 @@ let g:jedi#popup_on_dot = 1
 let g:jedi#use_tabs_not_buffers = 1
 
 Bundle 'fisadev/vim-isort'
-
 Bundle 'shime/vim-livedown'
 Bundle 'tpope/vim-surround'

@@ -75,12 +75,8 @@ else
 \e${DEFAULT_COLOR}'
 fi
 
-export ARCHFLAGS='-arch i386 -arch x86_64'
-
-
 
 export TERM=xterm-color
-#export GREP_OPTIONS='--color=auto' GREP_COLOR='1;32'
 
 export CLICOLOR=1
 if [ `uname` == "Darwin" ]; then
@@ -95,7 +91,6 @@ export LESS=FRSX
 
 export EDITOR=vim
 export PYOPEN_CMD=subl
-export SVN_EDITOR=$EDITOR
 export GIT_EDITOR=$EDITOR
 
 export LIBTOOLIZE=glibtoolize
@@ -105,7 +100,7 @@ export GOPATH=~/Development/go
 
 # python
 export PYTHONDONTWRITEBYTECODE=1
-export PYTHONSTARTUP="$HOME/.pythonrc.py"
+# export PYTHONSTARTUP="$HOME/.pythonrc.py"
 
 # virtualenvwrapper and pip
 if [ `id -u` != '0' ]; then
@@ -116,7 +111,6 @@ if [ `id -u` != '0' ]; then
   export PIP_REQUIRE_VIRTUALENV=true
   export PIP_RESPECT_VIRTUALENV=true
   export PIP_DOWNLOAD_CACHE=$HOME/.pip/cache
-  #export PIP_USE_MIRRORS=true
   if [ -e "/usr//bin/virtualenvwrapper.sh" ]; then
     source /usr//bin/virtualenvwrapper.sh
   fi
@@ -146,14 +140,11 @@ alias edit='$EDITOR $@'
 
 alias pgsql_start='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
 alias pgsql_stop='pg_ctl -D /usr/local/var/postgres stop -s -m fast'
-alias es_start='launchctl stop org.elasticsearch'
-alias es_stop='launchctl start org.elasticsearch'
 
 alias glog="git log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(yellow)%d%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
 
 alias scpresume='rsync --partial --progress --progress --stats'
 
-alias vag='vagrant $@'
 
 function ghettovpn() {
   $SSHUTTLE_EXECUTABLE -r "$VPN_HOST" 10/8
@@ -166,7 +157,6 @@ function cleanswp() {
 function cleanpycs() {
   find . -name "*.pyc" -exec rm -rf {} \;
 }
-
 
 
 function tfree() {
@@ -201,12 +191,6 @@ fi;
 
 [[ -s ~/.rvm/scripts/rvm ]] && source ~/.rvm/scripts/rvm  # This loads RVM into a shell session.
 
-#export CHEF_USER=zeeg
-
-# AWS tooling
-#export EC2_HOME="/usr/local/Cellar/ec2-api-tools/1.6.12.0/libexec"
-#export JAVA_HOME="$(/usr/libexec/java_home)"
-#export AWS_RDS_HOME="/usr/local/Cellar/rds-command-line-tools/1.12.002/libexec"
 
 workon_project() {
     if [ $# -lt 1 ]
@@ -231,7 +215,6 @@ workon_project() {
     tmux send-keys "git status" C-m
 
 }
-#source /etc/bash_completion.d/password-store
 
 # tmuxinator completion
 source ~/.bin/tmuxinator.bash

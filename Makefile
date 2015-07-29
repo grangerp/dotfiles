@@ -1,6 +1,14 @@
-install: install-bash install-virtualenvwrapper install-pythonrc \
-		 install-subl install-bin install-vcprompt install-git \
-		 install-hg install-tmux install-tmuxinator install-vimrc install-fish
+install: install-development-tools install-pip install-powerline install-bash install-virtualenvwrapper install-bin install-vcprompt install-git \
+	install-tmux install-tmuxinator install-vimrc
+
+install install-development-tools:
+	sudo dnf group install "Development Tools"
+
+install-pip:
+	sudo pip install pip -U
+
+install-powerline:
+	pip install --user powerline-status
 
 install-vcprompt:
 	@rm -rf /tmp/vcprompt
@@ -14,9 +22,6 @@ install-git:
 	ln -fs `pwd`/git/gitconfig ~/.gitconfig
 	curl -o ~/.git-completion.bash https://github.com/git/git/raw/master/contrib/completion/git-completion.bash -OL
 
-install-hg:
-	ln -fs `pwd`/hg/hgrc ~/.hgrc
-
 install-bin:
 	mkdir -p ~/.bin/
 	ln -fs `pwd`/bin/* ~/.bin/
@@ -27,39 +32,23 @@ install-bash:
 	@echo "Old .bash_profile saved as .bash_profile.old"
 
 install-virtualenvwrapper:
+	sudo pip install virtualenvwrapper
 	mkdir -p ~/.virtualenvs/
 	ln -fs `pwd`/virtualenvwrapper/* ~/.virtualenvs/
 
 install-tmux:
+	sudo dnf install tmux tmux-powerline
 	ln -fs `pwd`/tmux/.tmux.conf ~/.tmux.conf
 
 install-tmuxinator:
+	sudo dnf install gem rubygems rubygem-bundler ruby-devel
 	sudo gem install tmuxinator
 	mkdir -p ~/.tmuxinator/
 	ln -fs `pwd`/tmuxinator/* ~/.tmuxinator/
 
-
-install-pythonrc:
-	ln -fs `pwd`/python/pythonrc.py ~/.pythonrc.py
-
 install-vimrc:
+	sudo pip install isort
 	mkdir -p ~/.vim/bundle/
 	git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 	ln -fs `pwd`/vim/.vimrc ~/.vimrc
 
-install-subl:
-ifeq ($(shell uname),Darwin)
-	ln -fs `pwd`/sublimetext3/Packages/User/* ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User/
-	ln -fs "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/local/bin/subl
-endif
-
-install-fish:
-	mkdir -p ~/.config/fish/
-	ln -fs `pwd`/fish/config.fish ~/.config/fish/config.fish
-
-install-zsh:
-	ln -fs `pwd`/zsh/zshrc ~/.zshrc
-	# TODO(dcramer): there must be a better way to do specify my own theme?
-	[ -e ~/.oh-my-zsh ] && ln -fs `pwd`/zsh/themes/* ~/.oh-my-zsh/themes/
-	# mkdir -p ~/.zsh-extras/
-	# [ ! -e ~/.zsh-extras/zsh-autosuggestions ] && git clone git://github.com/tarruda/zsh-autosuggestions ~/.zsh-extras/zsh-autosuggestions
