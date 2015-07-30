@@ -42,6 +42,7 @@ set laststatus=2
 
 " git, fugitive
 Bundle 'tpope/vim-fugitive'
+set diffopt+=vertical
 
 " filebrowser
 Bundle 'scrooloose/nerdtree'
