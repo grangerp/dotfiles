@@ -2,6 +2,11 @@ set nocompatible
 filetype off
 
 " vim options "
+" to learn other move deactivate arrows
+noremap <Up> <Nop>
+noremap <Down> <Nop>
+noremap <Left> <Nop>
+noremap <Right> <Nop>
 " search option "
 :set incsearch
 :set hlsearch
