@@ -2,6 +2,11 @@ set nocompatible
 filetype off
 
 " vim options "
+" to learn other move deactivate arrows
+noremap <Up> <Nop>
+noremap <Down> <Nop>
+noremap <Left> <Nop>
+noremap <Right> <Nop>
 " search option "
 :set incsearch
 :set hlsearch
@@ -36,7 +41,7 @@ filetype plugin indent on
 " The rest of your config follows here
 
 " PowerLine
-Bundle 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+Bundle 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
 set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 9
 set laststatus=2
 
