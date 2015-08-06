@@ -56,7 +56,7 @@ map <F2> :NERDTreeToggle<CR>
 " python mode
 Bundle 'klen/python-mode'
 " disable rope (autocomplete)
-let g:pymode_rope =0 
+let g:pymode_rope =1 
 let g:pymode_folding=0
 let g:pymode_options_max_line_length = 100
 
