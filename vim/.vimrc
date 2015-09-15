@@ -110,3 +110,4 @@ cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 
 " sudo dnf instakk ack
 Plugin 'mileszs/ack.vim'
+Plugin 'jceb/vim-orgmode'
