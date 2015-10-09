@@ -77,6 +77,8 @@ let g:pymode_syntax_space_errors = g:pymode_syntax_all
 
 " Don't autofold code
 let g:pymode_folding = 0
+let g:pymode_paths = ['./apps']
+let g:pymode_rope_goto_definition_cmd = 'e'
 
 " FuzzyFinder
 " Bundle 'L9'
