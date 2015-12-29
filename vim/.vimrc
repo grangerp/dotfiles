@@ -59,6 +59,11 @@ Bundle 'klen/python-mode'
 let g:pymode_rope = 1
 let g:pymode_folding = 0
 let g:pymode_options_max_line_length = 100
+let g:pymode_rope_regenerate_on_write = 0
+" Extended autocompletion (rope could complete objects which have not been imported) from project *'g:pymode_rope_autoimport'*
+let g:pymode_rope_autoimport = 1
+" Offer to unresolved import object after completion.
+let g:pymode_rope_autoimport_import_after_complete = 1
 
 "Linting
 let g:pymode_lint = 1
