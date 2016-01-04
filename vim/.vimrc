@@ -82,16 +82,16 @@ let g:pymode_syntax_space_errors = g:pymode_syntax_all
 
 " Don't autofold code
 let g:pymode_folding = 0
-let g:pymode_paths = ['./apps']
+"let g:pymode_paths = ['./apps']
 let g:pymode_rope_goto_definition_cmd = 'e'
 
 " FuzzyFinder
-" Bundle 'L9'
-" Bundle 'FuzzyFinder'
+Bundle 'L9'
+Bundle 'FuzzyFinder'
 
-" nmap ,f :FufFileWithCurrentBufferDir<CR>
-" nmap ,b :FufBuffer<CR>
-" nmap ,t :FufCoverageFile<CR>
+nmap ,f :FufFileWithCurrentBufferDir<CR>
+nmap ,b :FufBuffer<CR>
+nmap ,t :FufCoverageFile<CR>
 " nmap ,t :FufTaggedFile<CR>
 
 
