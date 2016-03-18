@@ -65,6 +65,8 @@ let g:pymode_rope_regenerate_on_write = 0
 " let g:pymode_rope_autoimport = 1
 " Offer to unresolved import object after completion.
 " let g:pymode_rope_autoimport_import_after_complete = 1
+" let g:pymode_doc = 0
+let g:pymode_lint_on_fly = 0
 
 "Linting
 let g:pymode_lint = 1
@@ -93,7 +95,6 @@ Bundle 'FuzzyFinder'
 nmap ,f :FufFileWithCurrentBufferDir<CR>
 nmap ,b :FufBuffer<CR>
 nmap ,t :FufCoverageFile<CR>
-" nmap ,t :FufTaggedFile<CR>
 
 
 " Bundle 'davidhalter/jedi-vim'
