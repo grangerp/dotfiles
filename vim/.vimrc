@@ -33,6 +33,7 @@ set rnu
 " let Vundle manage Vundle
 " required! 
 Bundle 'gmarik/vundle'
+Bundle 'tpope/vim-sensible'
 
 " The bundles you install will be listed here
 
