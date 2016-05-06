@@ -59,6 +59,15 @@ function activevirtualenv() {
 }
 
 
+function docker.clean_containers() {
+	 docker rm $(docker ps -a | grep -v Up | grep -v CONTAINER | cut -f 1 -d ' ')
+ }
+
+function docker.clean_images() {
+    docker rmi $(docker images | grep none | tr -s ' ' | cut -f 3 -d ' ')
+}
+
+
 if [ `uname` == "Darwin" ]; then
   export BASEPROMPT='\n\e${USER_COLOR}\u\
 `activevirtualenv` \
