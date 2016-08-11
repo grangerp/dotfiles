@@ -65,7 +65,7 @@ let g:pymode_rope_regenerate_on_write = 0
 let g:pymode_rope_autoimport = 0 
 " Offer to unresolved import object after completion.
 let g:pymode_rope_autoimport_import_after_complete = 0
-let g:pymode_doc = 1
+let g:pymode_doc = 0
 let g:pymode_lint_on_fly = 0
 
 "Linting
@@ -87,6 +87,8 @@ let g:pymode_syntax_space_errors = g:pymode_syntax_all
 let g:pymode_folding = 0
 "let g:pymode_paths = ['./apps']
 let g:pymode_rope_goto_definition_cmd = 'e'
+
+let g:pymode_trim_whitespaces = 1
 
 " FuzzyFinder
 Bundle 'L9'
