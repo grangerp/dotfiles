@@ -103,18 +103,10 @@ nmap ,t :FufCoverageFile<CR>
 " let g:jedi#popup_on_dot = 1
 " let g:jedi#use_tabs_not_buffers = 1
 
+
 Bundle 'fisadev/vim-isort'
 Bundle 'shime/vim-livedown'
 Bundle 'tpope/vim-surround'
-Bundle 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
-
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-
-" If you want :UltiSnipsEdit to split your window.
-let g:UltiSnipsEditSplit="vertical"
 
 " :e %% to get current dir of the file
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
@@ -122,3 +114,19 @@ cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 " sudo dnf instakk ack
 Plugin 'mileszs/ack.vim'
 Plugin 'jceb/vim-orgmode'
+
+Bundle 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+
+autocmd FileType python UltiSnipsAddFiletypes django
+
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsListSnippets        = "<c-k>" "List possible snippets based on current file
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
+" https://github.com/cohama/lexima.vim
+Plugin 'cohama/lexima.vim'
