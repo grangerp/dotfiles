@@ -1,5 +1,5 @@
 install: install-development-tools install-pip install-powerline install-bash install-virtualenvwrapper install-bin install-vcprompt install-git \
-	install-tmux install-tmuxinator install-npm install-vimrc 
+	install-tmux install-tmuxinator install-npm install-vimrc install-emacs
 
 install install-development-tools:
 	sudo dnf group install "Development Tools"
@@ -52,6 +52,9 @@ install-vimrc:
 	mkdir -p ~/.vim/bundle/
 	git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 	ln -fs `pwd`/vim/.vimrc ~/.vimrc
+
+install-emacs:
+	ln -fs `pwd`/emacs/emacs ~/.emacs
 
 install-npm:
 	ln -fs `pwd`/npm/.npmrc ~/.npmrc
