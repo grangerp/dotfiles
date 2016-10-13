@@ -167,6 +167,10 @@ function cleanpycs() {
   find . -name "*.pyc" -exec rm -rf {} \;
 }
 
+# This will remove all *.pyc files and __pycache__ directories recursively in the current directory.
+function claenpycache() {
+  find . | grep -E "(__pycache__|\.pyc|\.pyo$)" | xargs rm -rf
+}
 
 function tfree() {
   top -l1 -s0 | head -n11
