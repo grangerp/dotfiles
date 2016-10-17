@@ -42,7 +42,7 @@ filetype plugin indent on
 " The rest of your config follows here
 
 " PowerLine
-Bundle 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
+" Bundle 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
 set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 9
 set laststatus=2
 
@@ -130,3 +130,4 @@ let g:UltiSnipsEditSplit="vertical"
 
 " https://github.com/cohama/lexima.vim
 Plugin 'cohama/lexima.vim'
+Plugin 'rust-lang/rust.vim'

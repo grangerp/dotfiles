@@ -1,4 +1,4 @@
-install: install-development-tools install-pip install-powerline install-bash install-virtualenvwrapper install-bin install-vcprompt install-git \
+install: install-development-tools install-pip install-bash install-virtualenvwrapper install-bin install-vcprompt install-git \
 	install-tmux install-tmuxinator install-npm install-vimrc install-emacs
 
 install install-development-tools:
@@ -6,9 +6,6 @@ install install-development-tools:
 
 install-pip:
 	sudo pip install pip -U
-
-install-powerline:
-	sudo pip install --user powerline-status
 
 install-vcprompt:
 	@rm -rf /tmp/vcprompt
@@ -37,7 +34,6 @@ install-virtualenvwrapper:
 	ln -fs `pwd`/virtualenvwrapper/* ~/.virtualenvs/
 
 install-tmux:
-	sudo dnf install tmux tmux-powerline
 	ln -fs `pwd`/tmux/.tmux.conf ~/.tmux.conf
 
 install-tmuxinator:
