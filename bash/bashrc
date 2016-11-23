@@ -104,7 +104,7 @@ export GIT_EDITOR=$EDITOR
 
 export LIBTOOLIZE=glibtoolize
 
-export PATH=./node_modules/.bin:$HOME/.rvm/bin:/usr/local/share/npm/bin:~/node_modules/.bin:~/pear/bin:~/.bin:/usr/local/bin:/usr/local/sbin:$HOME/Development/go/bin:$PATH
+export PATH=~/bin:./node_modules/.bin:$HOME/.rvm/bin:/usr/local/share/npm/bin:~/node_modules/.bin:~/pear/bin:~/.bin:/usr/local/bin:/usr/local/sbin:$HOME/Development/go/bin:$PATH
 export GOPATH=~/Development/go
 
 # python
@@ -252,3 +252,26 @@ PERL5LIB="/home/pgranger/perl5/lib/perl5${PERL5LIB+:}${PERL5LIB}"; export PERL5L
 PERL_LOCAL_LIB_ROOT="/home/pgranger/perl5${PERL_LOCAL_LIB_ROOT+:}${PERL_LOCAL_LIB_ROOT}"; export PERL_LOCAL_LIB_ROOT;
 PERL_MB_OPT="--install_base \"/home/pgranger/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/home/pgranger/perl5"; export PERL_MM_OPT;
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f /home/pgranger/Downloads/google-cloud-sdk/path.bash.inc ]; then
+  source '/home/pgranger/Downloads/google-cloud-sdk/path.bash.inc'
+fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f /home/pgranger/Downloads/google-cloud-sdk/completion.bash.inc ]; then
+  source '/home/pgranger/Downloads/google-cloud-sdk/completion.bash.inc'
+fi
+
+# carina
+if [ -f /home/pgranger/.dvm/dvm.sh ]; then
+    source /home/pgranger/.dvm/dvm.sh
+fi
+
+function docker.clean_containers() {
+    docker rm $(docker ps -a | grep -v Up | grep -v CONTAINER | cut -f 1 -d ' ')
+}
+
+function docker.clean_images() {
+    docker rmi $(docker images | grep none | tr -s ' ' | cut -f 3 -d ' ')
+}
