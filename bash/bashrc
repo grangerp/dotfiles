@@ -281,3 +281,11 @@ function git.remove_untracked_remote_branch(){
     # delete all local branch with no remote
     git fetch -p && git branch -vv | grep gone |gawk '{print $1}' | xargs git branch -d
 }
+
+function docker.clean_volumes(){
+    docker volume rm $(docker volume ls -qf dangling=true)
+}
+
+alias snes="~/ra/usr/local/bin/retroarch -L ~/ra/cores/snes9x2010_libretro.so"
+alias nes="~/ra/usr/local/bin/retroarch -L ~/ra/cores/nestopia_libretro.so"
+alias gen="~/ra/usr/local/bin/retroarch -L ~/ra/cores/genesis_plus_gx_libretro.so"
