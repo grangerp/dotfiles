@@ -275,3 +275,9 @@ function docker.clean_containers() {
 function docker.clean_images() {
     docker rmi $(docker images | grep none | tr -s ' ' | cut -f 3 -d ' ')
 }
+
+function git.remove_untracked_remote_branch(){
+    # fetch and prune remte
+    # delete all local branch with no remote
+    git fetch -p && git branch -vv | grep gone |gawk '{print $1}' | xargs git branch -d
+}
