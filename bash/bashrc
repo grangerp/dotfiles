@@ -232,10 +232,14 @@ workon_project() {
 # tmuxinator completion
 source ~/.bin/tmuxinator.bash
 
-# powerline http://askubuntu.com/questions/283908/how-can-i-install-and-use-powerline-plugin
-#if [ -f /usr/share/powerline/bash/powerline.sh ]; then
-#    source /usr/share/powerline/bash/powerline.sh
-#fi
+
+if [ -f `which powerline-daemon` ]; then
+  powerline-daemon -q
+  POWERLINE_BASH_CONTINUATION=1
+  POWERLINE_BASH_SELECT=1
+  . /usr/share/powerline/bash/powerline.sh
+fi
+
 
 export PROMPT="${BASEPROMPT}
 $ "
@@ -289,3 +293,10 @@ function docker.clean_volumes(){
 alias snes="~/ra/usr/local/bin/retroarch -L ~/ra/cores/snes9x2010_libretro.so"
 alias nes="~/ra/usr/local/bin/retroarch -L ~/ra/cores/nestopia_libretro.so"
 alias gen="~/ra/usr/local/bin/retroarch -L ~/ra/cores/genesis_plus_gx_libretro.so"
+
+alias sy="~/Downloads/syncany-0.4.7-alpha/bin/sy"
+
+alias git.status.all="ls -ld *|awk '{print \"cd \" $8 \";git st; cd ..\"}'|sh"
+alias git.fetch.all="ls -ld *|awk '{print \"cd \" $8 \";git fetch origin; cd ..\"}'|sh"
+alias git.gc.all="ls -ld *|awk '{print \"cd \" $8 \";git gc; cd ..\"}'|sh"
+
