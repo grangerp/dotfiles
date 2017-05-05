@@ -1,5 +1,5 @@
 install: install-development-tools install-pip install-bash install-virtualenvwrapper install-bin install-vcprompt install-git \
-	install-tmux install-tmuxinator install-npm install-vimrc install-emacs
+	install-tmux install-vimrc install-emacs
 
 install install-development-tools:
 	sudo dnf group install "Development Tools"
@@ -36,14 +36,7 @@ install-virtualenvwrapper:
 install-tmux:
 	ln -fs `pwd`/tmux/.tmux.conf ~/.tmux.conf
 
-install-tmuxinator:
-	sudo dnf install gem rubygems rubygem-bundler ruby-devel
-	sudo gem install tmuxinator
-	mkdir -p ~/.tmuxinator/
-	ln -fs `pwd`/tmuxinator/* ~/.tmuxinator/
-
 install-vimrc:
-	npm install -g livedown
 	sudo pip install isort
 	mkdir -p ~/.vim/bundle/
 	git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
