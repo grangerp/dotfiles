@@ -296,7 +296,10 @@ alias gen="~/ra/usr/local/bin/retroarch -L ~/ra/cores/genesis_plus_gx_libretro.s
 
 alias sy="~/Downloads/syncany-0.4.7-alpha/bin/sy"
 
-alias git.status.all="ls -ld *|awk '{print \"cd \" $8 \";git st; cd ..\"}'|sh"
+function git.stats.all(){
+    echo `pwd`
+    #ls -ld *|awk '{print "cd " $8 ";git st; cd .."}'|sh
+}
 alias git.fetch.all="ls -ld *|awk '{print \"cd \" $8 \";git fetch origin; cd ..\"}'|sh"
 alias git.gc.all="ls -ld *|awk '{print \"cd \" $8 \";git gc; cd ..\"}'|sh"
 
