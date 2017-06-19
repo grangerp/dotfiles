@@ -2,7 +2,7 @@ install: install-development-tools install-pip install-bash install-virtualenvwr
 	install-tmux install-vimrc install-emacs
 
 install install-development-tools:
-	sudo dnf group install "Development Tools"
+	sudo apt install build-essential 
 
 install-pip:
 	sudo pip install pip -U
