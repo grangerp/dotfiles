@@ -120,8 +120,8 @@ if [ `id -u` != '0' ]; then
   export PIP_REQUIRE_VIRTUALENV=true
   export PIP_RESPECT_VIRTUALENV=true
   export PIP_DOWNLOAD_CACHE=$HOME/.pip/cache
-  if [ -e "/usr//bin/virtualenvwrapper.sh" ]; then
-    source /usr//bin/virtualenvwrapper.sh
+  if [ -e "/usr/local/bin/virtualenvwrapper.sh" ]; then
+    source /usr/local/bin/virtualenvwrapper.sh
   fi
 fi
 
@@ -233,12 +233,12 @@ workon_project() {
 source ~/.bin/tmuxinator.bash
 
 
-if [ -f `which powerline-daemon` ]; then
-  powerline-daemon -q
-  POWERLINE_BASH_CONTINUATION=1
-  POWERLINE_BASH_SELECT=1
-  . /usr/share/powerline/bindings/bash/powerline.sh
-fi
+#if [ -f `which powerline-daemon` ]; then
+#  powerline-daemon -q
+#  POWERLINE_BASH_CONTINUATION=1
+#  POWERLINE_BASH_SELECT=1
+#  . /usr/share/powerline/bindings/bash/powerline.sh
+#fi
 
 
 export PROMPT="${BASEPROMPT}
@@ -303,3 +303,12 @@ function git.stats.all(){
 alias git.fetch.all="ls -ld *|awk '{print \"cd \" $8 \";git fetch origin; cd ..\"}'|sh"
 alias git.gc.all="ls -ld *|awk '{print \"cd \" $8 \";git gc; cd ..\"}'|sh"
 
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[ -f /home/pgranger/.npm-packages/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.bash ] && . /home/pgranger/.npm-packages/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.bash
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[ -f /home/pgranger/.npm-packages/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.bash ] && . /home/pgranger/.npm-packages/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.bashexport GPG_TTY=$(tty)
+
+export GPG_TTY=$(tty)
