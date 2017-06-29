@@ -4,8 +4,7 @@
 [user]
   email = pgranger@elementai.com
   name = Philippe Granger
-	signingkey = F9CBF87688FF6446
-
+  signingkey = F9CBF87688FF6446
 
 [color]
   ui = auto

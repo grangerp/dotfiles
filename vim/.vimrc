@@ -55,7 +55,10 @@ Bundle 'scrooloose/nerdtree'
 map <F2> :NERDTreeToggle<CR>
 
 " python mode
-Bundle 'klen/python-mode'
+Bundle 'python-mode/python-mode'
+
+let g:pymode = 1
+
 " disable rope (autocomplete)
 let g:pymode_rope = 1
 let g:pymode_folding = 0
@@ -67,6 +70,10 @@ let g:pymode_rope_autoimport = 0
 let g:pymode_rope_autoimport_import_after_complete = 0
 let g:pymode_doc = 0
 let g:pymode_lint_on_fly = 0
+let g:pymode_python = 'python3'
+let g:pymode_quickfix_minheight = 3
+let g:pymode_quickfix_maxheight = 6
+let g:pymode_indent = 1
 
 "Linting
 let g:pymode_lint = 1
