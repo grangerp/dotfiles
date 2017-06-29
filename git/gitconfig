@@ -2,8 +2,9 @@
   user = grangerp
 
 [user]
-  email = philippe.granger@valtech.ca
+  email = pgranger@elementai.com
   name = Philippe Granger
+	signingkey = F9CBF87688FF6446
 
 
 [color]
