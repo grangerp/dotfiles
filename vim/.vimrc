@@ -69,7 +69,6 @@ let g:pymode_rope_autoimport = 0
 " Offer to unresolved import object after completion.
 let g:pymode_rope_autoimport_import_after_complete = 0
 let g:pymode_doc = 0
-let g:pymode_lint_on_fly = 0
 let g:pymode_python = 'python3'
 let g:pymode_quickfix_minheight = 3
 let g:pymode_quickfix_maxheight = 6
@@ -77,9 +76,10 @@ let g:pymode_indent = 1
 
 "Linting
 let g:pymode_lint = 1
-let g:pymode_lint_checker = "pyflakes,pep8"
+let g:pymode_lint_checkers = ['pyflakes', 'pep8', 'mccabe']
 "" Auto check on save
 let g:pymode_lint_write = 1
+let g:pymode_lint_on_fly = 0
 
 " Support virtualenv
 let g:pymode_virtualenv = 1
