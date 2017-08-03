@@ -38,6 +38,9 @@ set rnu
 Bundle 'gmarik/vundle'
 Bundle 'tpope/vim-sensible'
 
+Bundle 'tpope/vim-commentary'
+
+
 " The bundles you install will be listed here
 
 filetype plugin indent on
