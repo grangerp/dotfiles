@@ -28,6 +28,9 @@ set hidden
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
+set undofile " Maintain undo history between sessions
+set undodir=~/.vim/undodir
+
 set rnu
 
 " let Vundle manage Vundle
