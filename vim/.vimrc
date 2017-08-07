@@ -37,7 +37,6 @@ set rnu
 " required! 
 Bundle 'gmarik/vundle'
 Bundle 'tpope/vim-sensible'
-
 Bundle 'tpope/vim-commentary'
 
 
@@ -55,10 +54,6 @@ set laststatus=2
 " git, fugitive
 Bundle 'tpope/vim-fugitive'
 set diffopt+=vertical
-
-" filebrowser
-Bundle 'scrooloose/nerdtree'
-map <F2> :NERDTreeToggle<CR>
 
 " python mode
 Bundle 'python-mode/python-mode'
@@ -112,21 +107,12 @@ nmap ,b :FufBuffer<CR>
 nmap ,t :FufCoverageFile<CR>
 
 
-" Bundle 'davidhalter/jedi-vim'
-" let g:jedi#popup_on_dot = 1
-" let g:jedi#use_tabs_not_buffers = 1
-
-
 Bundle 'fisadev/vim-isort'
 Bundle 'shime/vim-livedown'
 Bundle 'tpope/vim-surround'
 
 " :e %% to get current dir of the file
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
-
-" sudo dnf instakk ack
-Plugin 'mileszs/ack.vim'
-Plugin 'jceb/vim-orgmode'
 
 Bundle 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
