@@ -25,19 +25,23 @@ syntax on
 " Allow hidden buffers, don't limit to 1 file per window/split
 set hidden
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-
 set undofile " Maintain undo history between sessions
 set undodir=~/.vim/undodir
 
 set rnu
 
+" jump to the last position when reopening a file
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
+
+call plug#begin('~/.vim/plugged')
+
 " let Vundle manage Vundle
 " required! 
-Bundle 'gmarik/vundle'
-Bundle 'tpope/vim-sensible'
-Bundle 'tpope/vim-commentary'
+Plug 'gmarik/vundle'
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-commentary'
 
 
 " The bundles you install will be listed here
@@ -52,11 +56,11 @@ set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 9
 set laststatus=2
 
 " git, fugitive
-Bundle 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
 set diffopt+=vertical
 
 " python mode
-Bundle 'python-mode/python-mode'
+Plug 'python-mode/python-mode'
 
 let g:pymode = 1
 
@@ -99,23 +103,32 @@ let g:pymode_rope_goto_definition_cmd = 'e'
 let g:pymode_trim_whitespaces = 1
 
 " FuzzyFinder
-Bundle 'L9'
-Bundle 'FuzzyFinder'
+" Plug 'L9'
+" Plug 'FuzzyFinder'
 
 nmap ,f :FufFileWithCurrentBufferDir<CR>
 nmap ,b :FufBuffer<CR>
 nmap ,t :FufCoverageFile<CR>
 
 
-Bundle 'fisadev/vim-isort'
-Bundle 'shime/vim-livedown'
-Bundle 'tpope/vim-surround'
+Plug 'fisadev/vim-isort'
+Plug 'shime/vim-livedown'
+Plug 'tpope/vim-surround'
 
 " :e %% to get current dir of the file
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 
-Bundle 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+
+" https://github.com/cohama/lexima.vim
+Plug 'cohama/lexima.vim'
+Plug 'rust-lang/rust.vim'
+Plug 'w0rp/ale'
+
+
+" Initialize plugin system
+call plug#end()
 
 autocmd FileType python UltiSnipsAddFiletypes django
 
@@ -126,11 +139,6 @@ let g:UltiSnipsListSnippets        = "<c-k>" "List possible snippets based on cu
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
-
-" https://github.com/cohama/lexima.vim
-Plugin 'cohama/lexima.vim'
-Plugin 'rust-lang/rust.vim'
-Plugin 'w0rp/ale'
 
 
 set statusline=
