@@ -1,5 +1,5 @@
 install: install-development-tools install-pip install-bash install-virtualenvwrapper install-bin install-vcprompt install-git \
-	install-tmux install-vimrc install-emacs
+	install-tmux install-vimrc install-emacs install-nvim-init
 
 install install-development-tools:
 	sudo apt install build-essential 
@@ -41,6 +41,12 @@ install-vimrc:
 	mkdir -p ~/.vim/bundle/
 	git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 	ln -fs `pwd`/vim/.vimrc ~/.vimrc
+
+install-nvim-init:
+	mkdir -p ~/.config/nvim/
+	curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+		    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+	ln -fs `pwd`/nvim/init.vim ~/.config/nvim/init.vim
 
 install-emacs:
 	ln -fs `pwd`/emacs/emacs ~/.emacs
