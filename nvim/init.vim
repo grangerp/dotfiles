@@ -41,31 +41,10 @@ let g:deoplete#enable_at_startup = 1
 " jedi with deoplete
 Plug 'zchee/deoplete-jedi'
 
-" python-mode, we only want goto function, disable the rest
-Plug 'python-mode/python-mode'
-let g:pymode_trim_whitespaces = 1
-let g:pymode_options_max_line_length = 99
-let g:pymode_indent = 1
-let g:pymode_folding = 0
-let g:pymode_doc = 0
-let g:pymode_virtualenv = 1
-let g:pymode_lint = 0
-let g:pymode_rope_completion = 0
-" goto def use same window
-let g:pymode_rope_goto_definition_cmd = 'e'
-
 " Autocomplete for python
 " Plug 'davidhalter/jedi-vim'
 " Let deoplete do the autocomplete
 " let g:jedi#completions_enabled = 0
-
-" Flake8
-Plug 'nvie/vim-flake8'
-let g:flake8_cmd='/usr/local/bin/flake8'
-" show error in left margin
-let g:flake8_show_in_gutter=1
-" run on save
-autocmd BufWritePost *.py call Flake8()
 
 " Remove extraneous whitespace when edit mode is exited
 Plug 'thirtythreeforty/lessspace.vim'
@@ -95,14 +74,32 @@ Plug 'honza/vim-snippets'
 Plug 'neomake/neomake'
 " Neomake on every write
 autocmd! BufWritePost * Neomake
+
+" run neomake as you type
+" autocmd InsertChange,TextChanged * update | Neomake
+
 " open window automatically on run
 let g:neomake_open_list = 2
+let g:neomake_python_enabled_makers = ['flake8', 'mypy']
 
+" solarize theme
+Plug 'altercation/vim-colors-solarized'
+
+" Plug 'lifepillar/vim-solarized8'
 
 " Initialize plugin system
 call plug#end()
 
 filetype plugin indent on
+
+" solarize
+set background=dark
+" colorscheme solarized
+" set background=light
+" colorscheme solarized
+colorscheme solarized
+let g:solarized_termcolors=256
+
 
 """"""" Jedi-VIM """""""
 " Don't mess up undo history
