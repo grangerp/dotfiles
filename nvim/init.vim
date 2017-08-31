@@ -93,6 +93,9 @@ let g:neomake_python_enabled_makers = ['flake8', 'mypy']
 " auto close parentheses
 Plug 'cohama/lexima.vim'
 
+" fuzzy finder
+Plug 'ctrlpvim/ctrlp.vim'
+
 " Initialize plugin system
 call plug#end()
 
