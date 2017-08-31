@@ -90,6 +90,9 @@ let g:neomake_python_enabled_makers = ['flake8', 'mypy']
 
 " Plug 'lifepillar/vim-solarized8'
 
+" auto close parentheses
+Plug 'cohama/lexima.vim'
+
 " Initialize plugin system
 call plug#end()
 
