@@ -122,9 +122,11 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
 " https://github.com/cohama/lexima.vim
+" open close parentheses
 Plug 'cohama/lexima.vim'
 Plug 'rust-lang/rust.vim'
-Plug 'w0rp/ale'
+" linter
+" Plug 'w0rp/ale'
 
 
 " Initialize plugin system
