@@ -68,7 +68,8 @@ Plug 'tpope/vim-surround'
 
 " snipets
 Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
+" Plug 'honza/vim-snippets'
+Plug 'grangerp/vim-snippets'
 
 " Neomake
 Plug 'neomake/neomake'
