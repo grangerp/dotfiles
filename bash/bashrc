@@ -104,7 +104,7 @@ export GIT_EDITOR=$EDITOR
 
 export LIBTOOLIZE=glibtoolize
 
-export PATH=~/bin:./node_modules/.bin:$HOME/.rvm/bin:/usr/local/share/npm/bin:~/node_modules/.bin:~/pear/bin:~/.bin:/usr/local/bin:/usr/local/sbin:$HOME/Development/go/bin:$PATH
+export PATH=~/bin:./node_modules/.bin:$HOME/.rvm/bin:/usr/local/share/npm/bin:/usr/local/go/bin:~/node_modules/.bin:~/pear/bin:~/.bin:/usr/local/bin:/usr/local/sbin:$HOME/Development/go/bin:$PATH
 export GOPATH=~/Development/go
 
 # python
@@ -302,13 +302,5 @@ function git.stats.all(){
 }
 alias git.fetch.all="ls -ld *|awk '{print \"cd \" $8 \";git fetch origin; cd ..\"}'|sh"
 alias git.gc.all="ls -ld *|awk '{print \"cd \" $8 \";git gc; cd ..\"}'|sh"
-
-
-# tabtab source for serverless package
-# uninstall by removing these lines or running `tabtab uninstall serverless`
-[ -f /home/pgranger/.npm-packages/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.bash ] && . /home/pgranger/.npm-packages/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.bash
-# tabtab source for sls package
-# uninstall by removing these lines or running `tabtab uninstall sls`
-[ -f /home/pgranger/.npm-packages/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.bash ] && . /home/pgranger/.npm-packages/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.bashexport GPG_TTY=$(tty)
 
 export GPG_TTY=$(tty)
