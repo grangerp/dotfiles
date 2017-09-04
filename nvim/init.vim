@@ -94,6 +94,9 @@ let g:neomake_python_enabled_makers = ['flake8', 'mypy']
 " auto close parentheses
 Plug 'cohama/lexima.vim'
 
+" Pluse search match
+Plug 'inside/vim-search-pulse'
+
 " fuzzy finder
 Plug 'ctrlpvim/ctrlp.vim'
 
