@@ -85,7 +85,8 @@ else
 fi
 
 
-export TERM=xterm-color
+# export TERM=xterm-color
+export TERM=gnome-256color
 
 export CLICOLOR=1
 if [ `uname` == "Darwin" ]; then
@@ -104,7 +105,7 @@ export GIT_EDITOR=$EDITOR
 
 export LIBTOOLIZE=glibtoolize
 
-export PATH=~/bin:./node_modules/.bin:$HOME/.rvm/bin:/usr/local/share/npm/bin:/usr/local/go/bin:~/node_modules/.bin:~/pear/bin:~/.bin:/usr/local/bin:/usr/local/sbin:$HOME/Development/go/bin:$PATH
+export PATH=~/bin:./node_modules/.bin:$HOME/.rvm/bin:/usr/local/share/npm/bin:/usr/local/go/bin:~/node_modules/.bin:~/pear/bin:~/.bin:/usr/local/bin:/usr/local/sbin:$HOME/Development/go/bin:/home/pgranger/.local/bin:$PATH
 export GOPATH=~/Development/go
 
 # python
