@@ -57,6 +57,9 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 set diffopt+=vertical
 
+" For git to use hub
+Plug 'tpope/vim-rhubarb'
+
 " Isort
 Plug 'fisadev/vim-isort'
 
