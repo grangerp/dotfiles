@@ -86,7 +86,8 @@ fi
 
 
 # export TERM=xterm-color
-export TERM=gnome-256color
+# export TERM=gnome-256color
+export TERM=screen-256color
 
 export CLICOLOR=1
 if [ `uname` == "Darwin" ]; then
