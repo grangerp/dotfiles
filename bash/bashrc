@@ -6,126 +6,10 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-DEFAULT_COLOR="[00;1m"
-GRAY_COLOR="[37;1m"
-PINK_COLOR="[35;1m"
-GREEN_COLOR="[32;1m"
-CYAN_COLOR="[36;1m"
-ORANGE_COLOR="[33;1m"
-RED_COLOR="[31;1m"
-if [ `id -u` == '0' ]; then
-  USER_COLOR=$RED_COLOR
-else
-  USER_COLOR=$ORANGE_COLOR
-fi
-
-VCPROMPT_EXECUTABLE=/usr/local/bin/vcprompt
-SSHUTTLE_EXECUTABLE=/usr/local/bin/sshuttle
-
-function vcprompt() {
-  if [ -e "$VCPROMPT_EXECUTABLE" ]; then
-    $VCPROMPT_EXECUTABLE -f $' on \033[1;34m%n\033[00;1m:\033[0;37m%b\033[32;1m%m%u'
-  fi
-}
-
-function lastcommandfailed() {
-  code=$?
-  if [ $code != 0 ]; then
-    echo -n $'\033[37;1m exited \033[31;1m'
-    echo -n $code
-    echo -n $'\033[37;1m'
-  fi
-}
-
-function backgroundjobs() {
-  jobs|python -c 'if 1:
-    import sys
-    items = ["\033[36;1m%s\033[37;1m" % x.split()[2]
-             for x in sys.stdin.read().splitlines()]
-    if items:
-      if len(items) > 2:
-        string = "%s, and %s" % (", ".join(items[:-1]), items[-1])
-      else:
-        string = ", ".join(items)
-      print("\033[37;1m running %s" % string)
-  '
-}
-
-function activevirtualenv() {
-  if [ -n "$VIRTUAL_ENV" ]; then
-      echo -n $'\033[00;1m:\033[36;1m'
-      echo -n "$(basename $VIRTUAL_ENV)"
-  fi
-}
-
-
-function docker.clean_containers() {
-	 docker rm $(docker ps -a | grep -v Up | grep -v CONTAINER | cut -f 1 -d ' ')
- }
-
-function docker.clean_images() {
-    docker rmi $(docker images | grep none | tr -s ' ' | cut -f 3 -d ' ')
-}
-
-
-if [ `uname` == "Darwin" ]; then
-  export BASEPROMPT='\n\e${USER_COLOR}\u\
-`activevirtualenv` \
-\e${GRAY_COLOR}in \e${GREEN_COLOR}\w\
-\e${GRAY_COLOR}`vcprompt`\
-`backgroundjobs`\
-\e${DEFAULT_COLOR}'
-else
-  export BASEPROMPT='\n\e${USER_COLOR}\u\
-`activevirtualenv` \
-\e${GRAY_COLOR}in \e${GREEN_COLOR}\w\
-\e${GRAY_COLOR}`vcprompt`\
-`backgroundjobs`\
-\e${DEFAULT_COLOR}'
-fi
-
-
-# export TERM=xterm-color
-# export TERM=gnome-256color
 export TERM=screen-256color
 
-export CLICOLOR=1
-if [ `uname` == "Darwin" ]; then
-  export LSCOLORS=ExGxFxDxCxHxHxCbCeEbEb
-  export LC_CTYPE=en_US.utf-8
-  alias free=tfree
-else
-  alias ls='ls --color=auto'
-fi
-export IGNOREEOF=1
-export LESS=FRSX
-
-export EDITOR=vim
-export PYOPEN_CMD=subl
-export GIT_EDITOR=$EDITOR
-
-export LIBTOOLIZE=glibtoolize
 
 export PATH=~/bin:./node_modules/.bin:$HOME/.rvm/bin:/usr/local/share/npm/bin:/usr/local/go/bin:~/node_modules/.bin:~/pear/bin:~/.bin:/usr/local/bin:/usr/local/sbin:$HOME/Development/go/bin:/home/pgranger/.local/bin:$PATH
-export GOPATH=~/Development/go
-
-# python
-export PYTHONDONTWRITEBYTECODE=1
-# export PYTHONSTARTUP="$HOME/.pythonrc.py"
-
-# virtualenvwrapper and pip
-if [ `id -u` != '0' ]; then
-  export VIRTUAL_ENV_DISABLE_PROMPT=1
-  export VIRTUALENV_USE_DISTRIBUTE=1
-  export WORKON_HOME=$HOME/.virtualenvs
-  export PIP_VIRTUALENV_BASE=$WORKON_HOME
-  export PIP_REQUIRE_VIRTUALENV=true
-  export PIP_RESPECT_VIRTUALENV=true
-  export PIP_DOWNLOAD_CACHE=$HOME/.pip/cache
-  if [ -e "/usr/local/bin/virtualenvwrapper.sh" ]; then
-    source /usr/local/bin/virtualenvwrapper.sh
-  fi
-fi
 
 # Enable bash history
 export HISTCONTROL=erasedups
@@ -149,17 +33,7 @@ alias ..='cd ..'
 
 alias edit='$EDITOR $@'
 
-alias pgsql_start='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
-alias pgsql_stop='pg_ctl -D /usr/local/var/postgres stop -s -m fast'
-
 alias glog="git log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(yellow)%d%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
-
-alias scpresume='rsync --partial --progress --progress --stats'
-
-
-function ghettovpn() {
-  $SSHUTTLE_EXECUTABLE -r "$VPN_HOST" 10/8
-}
 
 function cleanswp() {
   find . -name "*.swp" -exec rm -rf {} \;
@@ -207,72 +81,8 @@ fi;
 [[ -s ~/.rvm/scripts/rvm ]] && source ~/.rvm/scripts/rvm  # This loads RVM into a shell session.
 
 
-workon_project() {
-    if [ $# -lt 1 ]
-    then
-        echo "Usage:"
-        echo -e "tworkon_project <virtualenv name>"
-        return 1
-    fi
-
-    # Create a new window.
-    tmux new-window -a -n "$1" -c "$1"
-
-    # Send keys to the bottom right pane.
-    tmux send-keys "workon $1" C-m
-    tmux send-keys "python manage.py runserver" C-m
-
-    # Split the window again, this time vertically.
-    tmux split-window -v -c "$1"
-
-    # Send keys to the large pane on the left.
-    tmux send-keys "workon $1" C-m
-    tmux send-keys "git status" C-m
-
-}
-
-# tmuxinator completion
-source ~/.bin/tmuxinator.bash
-
-
-#if [ -f `which powerline-daemon` ]; then
-#  powerline-daemon -q
-#  POWERLINE_BASH_CONTINUATION=1
-#  POWERLINE_BASH_SELECT=1
-#  . /usr/share/powerline/bindings/bash/powerline.sh
-#fi
-
-
-export PROMPT="${BASEPROMPT}
-$ "
+export PROMPT="$ "
 export PS1=$PROMPT
-
-NPM_PACKAGES="${HOME}/.npm-packages"
-NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
-PATH="$NPM_PACKAGES/bin:$PATH"
-unset MANPATH # delete if you already modified MANPATH elsewhere in your config
-MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
-
-PATH="/home/pgranger/perl5/bin${PATH+:}${PATH}"; export PATH;
-PERL5LIB="/home/pgranger/perl5/lib/perl5${PERL5LIB+:}${PERL5LIB}"; export PERL5LIB;
-PERL_LOCAL_LIB_ROOT="/home/pgranger/perl5${PERL_LOCAL_LIB_ROOT+:}${PERL_LOCAL_LIB_ROOT}"; export PERL_LOCAL_LIB_ROOT;
-PERL_MB_OPT="--install_base \"/home/pgranger/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=/home/pgranger/perl5"; export PERL_MM_OPT;
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f /home/pgranger/Downloads/google-cloud-sdk/path.bash.inc ]; then
-  source '/home/pgranger/Downloads/google-cloud-sdk/path.bash.inc'
-fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f /home/pgranger/Downloads/google-cloud-sdk/completion.bash.inc ]; then
-  source '/home/pgranger/Downloads/google-cloud-sdk/completion.bash.inc'
-fi
-
-# carina
-if [ -f /home/pgranger/.dvm/dvm.sh ]; then
-    source /home/pgranger/.dvm/dvm.sh
-fi
 
 function docker.clean_containers() {
     docker rm $(docker ps -a | grep -v Up | grep -v CONTAINER | cut -f 1 -d ' ')
@@ -302,14 +112,6 @@ function list_stashes(){
     done
 }
 
-
-
-alias snes="~/ra/usr/local/bin/retroarch -L ~/ra/cores/snes9x2010_libretro.so"
-alias nes="~/ra/usr/local/bin/retroarch -L ~/ra/cores/nestopia_libretro.so"
-alias gen="~/ra/usr/local/bin/retroarch -L ~/ra/cores/genesis_plus_gx_libretro.so"
-
-alias sy="~/Downloads/syncany-0.4.7-alpha/bin/sy"
-
 function git.stats.all(){
     echo `pwd`
     #ls -ld *|awk '{print "cd " $8 ";git st; cd .."}'|sh
@@ -318,3 +120,9 @@ alias git.fetch.all="ls -ld *|awk '{print \"cd \" $8 \";git fetch origin; cd ..\
 alias git.gc.all="ls -ld *|awk '{print \"cd \" $8 \";git gc; cd ..\"}'|sh"
 
 export GPG_TTY=$(tty)
+
+# pyenv
+export PATH="/home/pgranger/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
