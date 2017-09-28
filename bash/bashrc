@@ -318,3 +318,7 @@ alias git.fetch.all="ls -ld *|awk '{print \"cd \" $8 \";git fetch origin; cd ..\
 alias git.gc.all="ls -ld *|awk '{print \"cd \" $8 \";git gc; cd ..\"}'|sh"
 
 export GPG_TTY=$(tty)
+
+export PATH="~/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
