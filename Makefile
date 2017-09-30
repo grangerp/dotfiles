@@ -1,5 +1,6 @@
-install: install-development-tools install-pip install-bash install-virtualenvwrapper install-bin install-vcprompt install-git \
-	install-tmux install-vimrc install-emacs install-nvim-init install-pyenv
+install: install-development-tools install-pip install-bash install-virtualenvwrapper \
+	install-bin install-vcprompt install-git install-tmux install-vimrc install-emacs \
+	install-nvim-init install-pyenv install-pyenv-pyton-deps
 
 install install-development-tools:
 	sudo apt install build-essential 
@@ -58,3 +59,6 @@ install-npm:
 
 install-pyenv:
 	curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
+
+install-pyenv-pyton-deps:
+	sudo apt install libbz2-dev libreadline-dev libsqlite3-dev
