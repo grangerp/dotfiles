@@ -1,6 +1,135 @@
-""""""" Plugin management stuff """""""
-set nocompatible
-filetype off
+" Fisa-nvim-config
+" http://nvim.fisadev.com
+" version: 9.5 beta
+
+" TODO current problems:
+" * end key not working undef tmux+fish
+
+" ============================================================================
+" Vim-plug initialization
+" Avoid modify this section, unless you are very sure of what you are doing
+
+let vim_plug_just_installed = 0
+let vim_plug_path = expand('~/.config/nvim/autoload/plug.vim')
+if !filereadable(vim_plug_path)
+    echo "Installing Vim-plug..."
+    echo ""
+    silent !mkdir -p ~/.config/nvim/autoload
+    silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    let vim_plug_just_installed = 1
+endif
+
+" manually load vim-plug the first time
+if vim_plug_just_installed
+    :execute 'source '.fnameescape(vim_plug_path)
+endif
+
+" Obscure hacks done, you can now modify the rest of the .vimrc as you wish :)
+
+" ============================================================================
+" Active plugins
+" You can disable or add new ones here:
+
+" this needs to be here, so vim-plug knows we are declaring the plugins we
+" want to use
+call plug#begin('~/.config/nvim/plugged')
+
+" Now the actual plugins:
+
+" Airline
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+" Pending tasks list
+Plug 'fisadev/FixedTaskList.vim'
+
+" Async autocompletion
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" Completion from other opened files
+Plug 'Shougo/context_filetype.vim'
+" Python autocompletion
+Plug 'zchee/deoplete-jedi', { 'do': ':UpdateRemotePlugins' }
+" Just to add the python go-to-definition and similar features, autocompletion
+" from this plugin is disabled
+Plug 'davidhalter/jedi-vim'
+
+" decent defaults
+Plug 'tpope/vim-sensible'
+
+" comment code
+Plug 'tpope/vim-commentary'
+
+" Remove extraneous whitespace when edit mode is exited
+Plug 'thirtythreeforty/lessspace.vim'
+
+" git, fugitive
+Plug 'tpope/vim-fugitive'
+set diffopt+=vertical
+
+" Isort
+Plug 'fisadev/vim-isort'
+
+" md preview
+Plug 'shime/vim-livedown'
+
+" surround with
+Plug 'tpope/vim-surround'
+
+" snipets
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+
+" Automatically close parenthesis, etc
+Plug 'Townk/vim-autoclose'
+
+" Pluse search match
+Plug 'inside/vim-search-pulse'
+
+" fuzzy finder
+Plug 'ctrlpvim/ctrlp.vim'
+
+" Terminal Vim with 256 colors colorscheme
+Plug 'fisadev/fisa-vim-colorscheme'
+
+" Search results counter
+Plug 'vim-scripts/IndexedSearch'
+
+" Indent text object
+Plug 'michaeljsmith/vim-indent-object'
+
+" Indentation based movements
+Plug 'jeetsukumaran/vim-indentwise'
+
+" Better language packs
+Plug 'sheerun/vim-polyglot'
+
+" Ack code search (requires ack installed in the system)
+Plug 'mileszs/ack.vim'
+" TODO is there a way to prevent the progress which hides the editor?
+
+" Yank history navigation
+Plug 'vim-scripts/YankRing.vim'
+
+" Linters
+Plug 'neomake/neomake'
+" TODO is it running on save? or when?
+" TODO not detecting errors, just style, is it using pylint?
+
+" Initialize plugin system
+call plug#end()
+
+
+" ============================================================================
+" Install plugins the first time vim runs
+
+if vim_plug_just_installed
+	echo "Installing Bundles, please ignore key map error messages"
+    :PlugInstall
+endif
+
+" disable mouse navigation
+set mouse =
+set mouse =""
 
 " Jump to the last position when reopening a file
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
@@ -26,194 +155,160 @@ set rnu
 " :e %% to get current dir of the file
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h').'/' : '%%'
 
-call plug#begin('~/.local/share/nvim/plugged')
+" Highlight 80th column
+set colorcolumn=100
 
-" decent defaults
-Plug 'tpope/vim-sensible'
+" tabs and spaces handling
+set expandtab
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
 
-" comment code
-Plug 'tpope/vim-commentary'
+" use 256 colors when possible
+if (&term =~? 'mlterm\|xterm\|xterm-256\|screen-256') || has('nvim')
+	let &t_Co = 256
+    colorscheme fisa
+else
+    colorscheme delek
+endif
 
-" nvim autocomplete
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-let g:deoplete#enable_at_startup = 1
+" needed so deoplete can auto select the first suggestion
+set completeopt+=noinsert
+" comment this line to enable autocompletion preview window
+" (displays documentation related to the selected completion option)
+set completeopt-=preview
 
-" jedi with deoplete
-Plug 'zchee/deoplete-jedi'
+" autocompletion of files and commands behaves like shell
+" (complete only the common part, list the options that match)
+set wildmode=list:longest
 
-" Autocomplete for python
-" Plug 'davidhalter/jedi-vim'
-" Let deoplete do the autocomplete
-" let g:jedi#completions_enabled = 0
+" save as sudo
+ca w!! w !sudo tee "%"
 
-" Remove extraneous whitespace when edit mode is exited
-Plug 'thirtythreeforty/lessspace.vim'
+" tab navigation mappings
+map tt :tabnew
+map <M-Right> :tabn<CR>
+imap <M-Right> <ESC>:tabn<CR>
+map <M-Left> :tabp<CR>
+imap <M-Left> <ESC>:tabp<CR>
 
-" Status bar mods
-Plug 'bling/vim-airline'
-Plug 'airblade/vim-gitgutter'
+" when scrolling, keep cursor 3 lines away from screen border
+set scrolloff=3
 
-" git, fugitive
-Plug 'tpope/vim-fugitive'
-set diffopt+=vertical
+" clear search results
+nnoremap <silent> // :noh<CR>
 
-" For git to use hub
-Plug 'tpope/vim-rhubarb'
+" clear empty spaces at the end of lines on save of python files
+autocmd BufWritePre *.py :%s/\s\+$//e
 
-" Isort
-Plug 'fisadev/vim-isort'
+" ============================================================================
+" Plugins settings and mappings
+" Edit them as you wish.
 
-" md preview
-Plug 'shime/vim-livedown'
+" Tagbar -----------------------------
 
-" surround with
-Plug 'tpope/vim-surround'
+" toggle tagbar display
+map <F4> :TagbarToggle<CR>
+" autofocus on tagbar open
+let g:tagbar_autofocus = 1
 
-" snipets
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
+" Tasklist ------------------------------
 
-" Neomake
-Plug 'neomake/neomake'
-" Neomake on every write
+" show pending tasks list
+map <F2> :TaskList<CR>
+
+" Neomake ------------------------------
+
+" Run linter on write
 autocmd! BufWritePost * Neomake
-
-" run neomake as you type
-" autocmd InsertChange,TextChanged * update | Neomake
-
-" Python mode
-Plug 'python-mode/python-mode'
-
 " open window automatically on run
 let g:neomake_open_list = 2
 let g:neomake_python_enabled_makers = ['flake8', 'mypy']
 
-" solarize theme
-" Plug 'altercation/vim-colors-solarized'
+" Deoplete -----------------------------
 
-" Plug 'lifepillar/vim-solarized8'
+" Use deoplete.
 
-" auto close parentheses
-Plug 'cohama/lexima.vim'
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_ignore_case = 1
+let g:deoplete#enable_smart_case = 1
+" complete with words from any opened file
+let g:context_filetype#same_filetypes = {}
+let g:context_filetype#same_filetypes._ = '_'
 
-" Pluse search match
-Plug 'inside/vim-search-pulse'
+" Jedi-vim ------------------------------
 
-" fuzzy finder
-Plug 'ctrlpvim/ctrlp.vim'
+" Disable autocompletion (using deoplete instead)
+let g:jedi#completions_enabled = 0
 
-" Initialize plugin system
-call plug#end()
+" All these mappings work only for python code:
+" Go to definition
+let g:jedi#goto_command = ',d'
+" Find ocurrences
+let g:jedi#usages_command = ',o'
+" Find assignments
+let g:jedi#goto_assignments_command = ',a'
+" Go to definition in new tab
+nmap ,D :tab split<CR>:call jedi#goto()<CR>
 
-filetype plugin indent on
+" Ack.vim ------------------------------
 
-" Python mode
-let g:pymode = 1
+" mappings
+nmap ,r :Ack
+nmap ,wr :Ack <cword><CR>
 
-" disable rope (autocomplete)
-let g:pymode_rope_completion = 0
-let g:pymode_rope = 1
-let g:pymode_folding = 0
-let g:pymode_options_max_line_length = 100
-let g:pymode_rope_regenerate_on_write = 0
-let g:pymode_rope_autoimport = 0
-let g:pymode_rope_autoimport_import_after_complete = 0
-let g:pymode_doc = 0
-let g:pymode_python = 'python3'
-let g:pymode_quickfix_minheight = 3
-let g:pymode_quickfix_maxheight = 6
-let g:pymode_indent = 1
+" Window Chooser ------------------------------
 
-"Linting
-let g:pymode_lint = 0
-" let g:pymode_lint_checkers = ['pyflakes', 'pep8', 'mccabe']
-" Auto check on save
-" let g:pymode_lint_write = 1
-" let g:pymode_lint_on_fly = 0
+" mapping
+nmap  -  <Plug>(choosewin)
+" show big letters
+let g:choosewin_overlay_enable = 1
 
-" Support virtualenv
-let g:pymode_virtualenv = 1
+" Signify ------------------------------
 
-" syntax highlighting
-let g:pymode_syntax = 1
-let g:pymode_syntax_all = 1
-let g:pymode_syntax_indent_errors = g:pymode_syntax_all
-let g:pymode_syntax_space_errors = g:pymode_syntax_all
+" this first setting decides in which order try to guess your current vcs
+" UPDATE it to reflect your preferences, it will speed up opening files
+let g:signify_vcs_list = [ 'git', 'hg' ]
+" mappings to jump to changed blocks
+nmap <leader>sn <plug>(signify-next-hunk)
+nmap <leader>sp <plug>(signify-prev-hunk)
+" nicer colors
+highlight DiffAdd           cterm=bold ctermbg=none ctermfg=119
+highlight DiffDelete        cterm=bold ctermbg=none ctermfg=167
+highlight DiffChange        cterm=bold ctermbg=none ctermfg=227
+highlight SignifySignAdd    cterm=bold ctermbg=237  ctermfg=119
+highlight SignifySignDelete cterm=bold ctermbg=237  ctermfg=167
+highlight SignifySignChange cterm=bold ctermbg=237  ctermfg=227
 
-" Don't autofold code
-let g:pymode_folding = 0
-let g:pymode_rope_goto_definition_cmd = 'e'
-let g:pymode_trim_whitespaces = 1
+" Autoclose ------------------------------
 
-" solarize
-" set background=dark
-" colorscheme solarized
-" set background=light
-" colorscheme solarized
-" colorscheme solarized
-" let g:solarized_termcolors=256
+" Fix to let ESC work as espected with Autoclose plugin
+" (without this, when showing an autocompletion window, ESC won't leave insert
+"  mode)
+let g:AutoClosePumvisible = {"ENTER": "\<C-Y>", "ESC": "\<ESC>"}
 
+" Yankring -------------------------------
 
-""""""" Jedi-VIM """""""
-" Don't mess up undo history
-let g:jedi#show_call_signatures = "0"
+" Fix for yankring and neovim problem when system has non-text things copied
+" in clipboard
+let g:yankring_clipboard_monitor = 0
+let g:yankring_history_dir = '~/.config/nvim/'
 
+" Airline ------------------------------
 
-""""""" General coding stuff """""""
-" Highlight 80th column
-set colorcolumn=100
-" highlight ColorColumn guibg=tomato
-" Always show status bar
-set laststatus=2
-" Let plugins show effects after 500ms, not 4s
-set updatetime=500
-" Disable mouse click to go to position
-set mouse-=a
-" Don't let autocomplete affect usual typing habits
-set completeopt=menuone,preview,noinsert
+let g:airline_powerline_fonts = 0
+let g:airline_theme = 'bubblegum'
+let g:airline#extensions#whitespace#enabled = 0
 
-
-""""""" Python stuff """""""
-syntax enable
-set number showmatch
-set shiftwidth=4 tabstop=4 softtabstop=4 expandtab autoindent
-let python_highlight_all = 1
-
-
-""""""" Keybindings """""""
-" Set up leaders
-let mapleader=","
-let maplocalleader="\\"
-
-" Mac OS X option-left / right
-noremap â b
-noremap æ e
-inoremap â <C-o>b
-inoremap æ <C-o>e<right>
-" Note - this required binding in preferences (Cmd-,) option+backspace to
-" escape+z.
-" Why this one is complicated - <C-o> at end of line moves cursor by one
-" character, which means a trailing character could be left.
-inoremap <expr> ú col('.')>1 ? 'T<Left><C-o>db<Delete>' : '<Backspace>T<Left><c-o>db<Delete>'
-" Requires binding option+forward delete to escape
-inoremap ø <C-o>dw
-
-" Linux / windows ctrl+backspace ctrl+delete
-" Note that ctrl+backspace doesn't work in Linux, so ctrl+\ is also available
-imap <C-backspace> ú
-imap <C-\> ú
-imap <C-delete> ø
-
-" Arrow keys up/down move visually up and down rather than by whole lines.  In
-" other words, wrapped lines will take longer to scroll through, but better
-" control in long bodies of text.
-" NOTE - Disabled since <leader><leader>w|e|b works well with easymotion
-"noremap <up> gk
-"noremap <down> gj
-
-" Neomake and other build commands (ctrl-b)
-nnoremap <C-b> :w<cr>:Neomake<cr>
-
-autocmd BufNewFile,BufRead *.tex,*.bib noremap <buffer> <C-b> :w<cr>:new<bar>r !make<cr>:setlocal buftype=nofile<cr>:setlocal bufhidden=hide<cr>:setlocal noswapfile<cr>
-autocmd BufNewFile,BufRead *.tex,*.bib imap <buffer> <C-b> <Esc><C-b>
-
+" to use fancy symbols for airline, uncomment the following lines and use a
+" patched font (more info on docs/fancy_symbols.rst)
+if !exists('g:airline_symbols')
+   let g:airline_symbols = {}
+endif
+let g:airline_left_sep = '⮀'
+let g:airline_left_alt_sep = '⮁'
+let g:airline_right_sep = '⮂'
+let g:airline_right_alt_sep = '⮃'
+let g:airline_symbols.branch = '⭠'
+let g:airline_symbols.readonly = '⭤'
+let g:airline_symbols.linenr = '⭡'
