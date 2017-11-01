@@ -15,7 +15,7 @@ install-development-tools:
 	#sudo add-apt-repository ppa:phoerious/keepassxc; 
 	#sudo apt update
 	sudo apt install build-essential 
-	sudo apt install keepassxc python3-pip curl nautilus-dropbox neovim python3-neovim sirikali gocryptfs 
+	sudo apt install keepassxc python3-pip curl nautilus-dropbox neovim python3-neovim sirikali gocryptfs tmux python3-venv
 
 install-gnome:
 	sudo apt install gnome-tweak-tool gnome-session gnome-calendar gnome-maps gnome-weather polari gnome-documents gnome-photos gnome-music
