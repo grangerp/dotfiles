@@ -1,12 +1,42 @@
-install: install-development-tools install-pip install-bash install-virtualenvwrapper \
-	install-bin install-vcprompt install-git install-tmux install-vimrc install-emacs \
-	install-nvim-init install-pyenv install-pyenv-pyton-deps
+install: install-development-tools \
+	install-gnome \
+	install-virtualenvwrapper \
+	install-bash  \
+	install-bin \
+	install-vcprompt \
+	install-git \
+	install-tmux \
+	install-vimrc \
+	install-nvim-init\
+	install-steam \
+	install-rambox
 
-install install-development-tools:
+install-development-tools:
+	#sudo add-apt-repository ppa:phoerious/keepassxc; 
+	#sudo apt update
 	sudo apt install build-essential 
+	sudo apt install keepassxc python3-pip curl nautilus-dropbox neovim python3-neovim sirikali gocryptfs 
 
-install-pip:
-	sudo pip install pip -U
+install-gnome:
+	sudo apt install gnome-tweak-tool gnome-session gnome-calendar gnome-maps gnome-weather polari gnome-documents gnome-photos gnome-music
+	#To get the GDM3 login screen to use the upstream GNOME color scheme you need to run this command (via Linux Guy):
+	#sudo update-alternatives --config gdm3.css
+
+install-steam:
+	sudo apt install steam steam-devices
+
+install-virtualenvwrapper:
+	sudo apt install virtualenvwrapper
+	mkdir -p ~/.virtualenvs/
+
+install-bash:
+	ln -fs `pwd`/bash/bashrc ~/.bash_profile
+	ln -fs ~/.bash_profile ~/.bashrc
+	@echo "Old .bash_profile saved as .bash_profile.old"
+
+install-bin:
+	mkdir -p ~/.bin/
+	ln -fs `pwd`/bin/* ~/.bin/
 
 install-vcprompt:
 	@rm -rf /tmp/vcprompt
@@ -20,28 +50,13 @@ install-git:
 	ln -fs `pwd`/git/gitconfig ~/.gitconfig
 	curl -o ~/.git-completion.bash https://github.com/git/git/raw/master/contrib/completion/git-completion.bash -OL
 
-install-bin:
-	mkdir -p ~/.bin/
-	ln -fs `pwd`/bin/* ~/.bin/
-
-install-bash:
-	ln -fs `pwd`/bash/bashrc ~/.bash_profile
-	ln -fs ~/.bash_profile ~/.bashrc
-	@echo "Old .bash_profile saved as .bash_profile.old"
-
-install-virtualenvwrapper:
-	sudo pip install virtualenvwrapper
-	mkdir -p ~/.virtualenvs/
-	ln -fs `pwd`/virtualenvwrapper/* ~/.virtualenvs/
-
 install-tmux:
 	ln -fs `pwd`/tmux/.tmux.conf ~/.tmux.conf
 
-install-vimrc:
-	sudo pip install isort
-	mkdir -p ~/.vim/bundle/
-	git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
-	ln -fs `pwd`/vim/.vimrc ~/.vimrc
+install-vimrc:	
+	if test -d "~/.vim/bundle" ]; then \
+	  mkdir -p ~/.vim/bundle/; git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle; ln -fs `pwd`/vim/.vimrc ~/.vimrc; \
+	fi
 
 install-nvim-init:
 	mkdir -p ~/.config/nvim/
@@ -57,8 +72,7 @@ install-npm:
 	mkdir -p "${HOME}/.npm-packages"
 	sudo dnf install npm
 
-install-pyenv:
-	curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
-
-install-pyenv-pyton-deps:
-	sudo apt install libbz2-dev libreadline-dev libsqlite3-dev
+install-rambox:
+	@mkdir -p ~/AppImage	
+	#@cd ~/AppImage && curl -o rambox.AppImage https://getrambox.herokuapp.com/download/x64?filetype=AppImage && \
+	#    chmod +x rambox.AppImage
