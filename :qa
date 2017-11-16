@@ -148,12 +148,6 @@ Plug 'neomake/neomake'
 " TODO is it running on save? or when?
 " TODO not detecting errors, just style, is it using pylint?
 
-" Theme
-Plug 'trevordmiller/nova-vim'
-
-" highlight on yank
-Plug 'machakann/vim-highlightedyank'
-
 " Initialize plugin system
 call plug#end()
 
@@ -206,8 +200,7 @@ set shiftwidth=4
 " use 256 colors when possible
 if (&term =~? 'mlterm\|xterm\|xterm-256\|screen-256') || has('nvim')
 	let &t_Co = 256
-    " colorscheme fisa
-    colorscheme nova
+    colorscheme fisa
 else
     colorscheme delek
 endif
