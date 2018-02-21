@@ -254,6 +254,3 @@ export INFOPATH="/home/linuxbrew/.linuxbrew/share/info:$INFOPATH"
 # tabtab source for sls package
 # uninstall by removing these lines or running `tabtab uninstall sls`
 [ -f /home/pgranger/.npm-packages/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.bash ] && . /home/pgranger/.npm-packages/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.bash
-export PATH=$PATH:/home/pgranger/bin
-
-source '/home/pgranger/lib/azure-cli/az.completion'
