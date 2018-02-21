@@ -95,6 +95,9 @@ Plug 'thirtythreeforty/lessspace.vim'
 Plug 'tpope/vim-fugitive'
 set diffopt+=vertical
 
+" enable Gbrowse
+Plug 'tpope/vim-rhubarb'
+
 " Isort
 Plug 'fisadev/vim-isort'
 
@@ -154,6 +157,9 @@ Plug 'trevordmiller/nova-vim'
 " highlight on yank
 Plug 'machakann/vim-highlightedyank'
 
+" rust
+Plug 'rust-lang/rust.vim'
+
 " Initialize plugin system
 call plug#end()
 
@@ -166,8 +172,9 @@ if vim_plug_just_installed
     :PlugInstall
 endif
 
+let g:vim_isort_python_version = 'python3'
+
 " disable mouse navigation
-set mouse =
 set mouse =""
 
 " Jump to the last position when reopening a file
@@ -206,8 +213,8 @@ set shiftwidth=4
 " use 256 colors when possible
 if (&term =~? 'mlterm\|xterm\|xterm-256\|screen-256') || has('nvim')
 	let &t_Co = 256
-    " colorscheme fisa
-    colorscheme nova
+    colorscheme fisa
+    " colorscheme nova
 else
     colorscheme delek
 endif
