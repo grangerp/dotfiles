@@ -60,4 +60,4 @@
 [help]
 	autocorrect = 1
 [commit]
-	gpgsign = false
+	gpgsign = true
