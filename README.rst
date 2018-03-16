@@ -8,3 +8,4 @@ You will need Armin's vcprompt for the bash prompt: https://bitbucket.org/mitsuh
 ::
 
     git clone git://github.com/grangerp/dotfiles.git && cd dotfiles && make install
+allo
