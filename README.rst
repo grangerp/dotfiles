@@ -1,4 +1,3 @@
-
 My various dotfiles (works on Ubuntu and OS X).
 
 Heavily inspired by Armin Ronacher :)
