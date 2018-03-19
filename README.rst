@@ -1,5 +1,6 @@
 My various dotfiles (works on Ubuntu and OS X).
 
+
 Heavily inspired by Armin Ronacher :)
 
 You will need Armin's vcprompt for the bash prompt: https://bitbucket.org/mitsuhiko/vcprompt
