@@ -160,6 +160,9 @@ Plug 'machakann/vim-highlightedyank'
 " rust
 Plug 'rust-lang/rust.vim'
 
+" golang
+Plug 'fatih/vim-go'
+
 " Initialize plugin system
 call plug#end()
 
