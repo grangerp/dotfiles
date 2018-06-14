@@ -248,7 +248,7 @@ export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 export MANPATH="/home/linuxbrew/.linuxbrew/share/man:$MANPATH"
 export INFOPATH="/home/linuxbrew/.linuxbrew/share/info:$INFOPATH"
--
+
 # tabtab source for serverless package
 # uninstall by removing these lines or running `tabtab uninstall serverless`
 [ -f /home/pgranger/.npm-packages/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.bash ] && . /home/pgranger/.npm-packages/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.bash

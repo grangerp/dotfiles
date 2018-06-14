@@ -71,6 +71,16 @@ nmap ,c :Commands<CR>
 "nmap ,wm :call CtrlPWithSearchText(expand('<cword>'), 'MRUFiles')<CR>
 "nmap ,wc :call CtrlPWithSearchText(expand('<cword>'), 'CmdPalette')<CR>
 
+" black
+Plug 'ambv/black'
+
+" yapf
+Plug 'google/yapf', { 'rtp': 'plugins/vim', 'for': 'python' }
+
+Plug 'yuttie/comfortable-motion.vim'
+
+" pomodoro
+Plug 'soywod/vim-keepeye'
 
 " Async autocompletion
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -255,6 +265,10 @@ autocmd BufWritePre *.py :%s/\s\+$//e
 " Plugins settings and mappings
 " Edit them as you wish.
 
+" Black
+let g:black_linelength = 100
+autocmd BufWritePost *.py execute ':Black'
+
 " Tagbar -----------------------------
 
 " toggle tagbar display
@@ -346,7 +360,7 @@ let g:yankring_history_dir = '~/.config/nvim/'
 
 " Airline ------------------------------
 
-let g:airline_powerline_fonts = 0
+let g:airline_powerline_fonts = 1
 let g:airline_theme = 'bubblegum'
 let g:airline#extensions#whitespace#enabled = 0
 
@@ -355,10 +369,13 @@ let g:airline#extensions#whitespace#enabled = 0
 if !exists('g:airline_symbols')
    let g:airline_symbols = {}
 endif
-let g:airline_left_sep = '⮀'
-let g:airline_left_alt_sep = '⮁'
-let g:airline_right_sep = '⮂'
-let g:airline_right_alt_sep = '⮃'
-let g:airline_symbols.branch = '⭠'
-let g:airline_symbols.readonly = '⭤'
-let g:airline_symbols.linenr = '⭡'
+" let g:airline_left_sep = '⮀'
+" let g:airline_left_alt_sep = '⮁'
+" let g:airline_right_sep = '⮂'
+" let g:airline_right_alt_sep = '⮃'
+" let g:airline_symbols.branch = '⭠'
+" let g:airline_symbols.readonly = '⭤'
+" let g:airline_symbols.linenr = '⭡'
+
+
+let g:python3_host_prog = '/home/pgranger/.pyenv/versions/3.6.5/bin/python'
