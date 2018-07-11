@@ -43,6 +43,9 @@ Plug 'vim-airline/vim-airline-themes'
 " Pending tasks list
 Plug 'fisadev/FixedTaskList.vim'
 
+" A Vim plugin which provides ways of navigating JSON document buffers.
+Plug 'mogelbrod/vim-jsonpath'
+
 " Fzf ------------------------------
 
 " file finder mapping
