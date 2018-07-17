@@ -36,43 +36,18 @@ call plug#begin('~/.config/nvim/plugged')
 
 " Now the actual plugins:
 
-" Airline
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+" lightline
+Plug 'itchyny/lightline.vim'
+
 
 " Pending tasks list
 Plug 'fisadev/FixedTaskList.vim'
 
+" Ballerina
+Plug 'ballerina-attic/plugin-vim'
+
 " A Vim plugin which provides ways of navigating JSON document buffers.
 Plug 'mogelbrod/vim-jsonpath'
-
-" Fzf ------------------------------
-
-" file finder mapping
-nmap ,e :Files<CR>
-" tags (symbols) in current file finder mapping
-nmap ,g :BTag<CR>
-" tags (symbols) in all files finder mapping
-nmap ,G :Tag<CR>
-" general code finder in current file mapping
-nmap ,f :BLines<CR>
-" general code finder in all files mapping
-nmap ,F :Lines<CR>
-" commands finder mapping
-nmap ,c :Commands<CR>
-" to be able to call CtrlP with default search text
-"function! CtrlPWithSearchText(search_text, ctrlp_command_end)
-    "execute ':CtrlP' . a:ctrlp_command_end
-    "call feedkeys(a:search_text)
-"endfunction
-" same as previous mappings, but calling with current word as default text
-"nmap ,wg :call CtrlPWithSearchText(expand('<cword>'), 'BufTag')<CR>
-"nmap ,wG :call CtrlPWithSearchText(expand('<cword>'), 'BufTagAll')<CR>
-"nmap ,wf :call CtrlPWithSearchText(expand('<cword>'), 'Line')<CR>
-"nmap ,we :call CtrlPWithSearchText(expand('<cword>'), '')<CR>
-"nmap ,pe :call CtrlPWithSearchText(expand('<cfile>'), '')<CR>
-"nmap ,wm :call CtrlPWithSearchText(expand('<cword>'), 'MRUFiles')<CR>
-"nmap ,wc :call CtrlPWithSearchText(expand('<cword>'), 'CmdPalette')<CR>
 
 " black
 Plug 'ambv/black'
@@ -292,6 +267,33 @@ autocmd! BufWritePost * Neomake
 let g:neomake_open_list = 2
 let g:neomake_python_enabled_makers = ['flake8', 'mypy']
 
+" Fzf ------------------------------
+
+" file finder mapping
+nmap ,e :Files<CR>
+" tags (symbols) in current file finder mapping
+nmap ,g :BTag<CR>
+" tags (symbols) in all files finder mapping
+nmap ,G :Tag<CR>
+" general code finder in current file mapping
+nmap ,f :BLines<CR>
+" general code finder in all files mapping
+nmap ,F :Lines<CR>
+" commands finder mapping
+nmap ,c :Commands<CR>
+
+" lightline ------------------------------
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'fugitive#head'
+      \ },
+      \ }
+
 " Deoplete -----------------------------
 
 " Use deoplete.
@@ -360,25 +362,5 @@ let g:AutoClosePumvisible = {"ENTER": "\<C-Y>", "ESC": "\<ESC>"}
 " in clipboard
 let g:yankring_clipboard_monitor = 0
 let g:yankring_history_dir = '~/.config/nvim/'
-
-" Airline ------------------------------
-
-let g:airline_powerline_fonts = 1
-let g:airline_theme = 'bubblegum'
-let g:airline#extensions#whitespace#enabled = 0
-
-" to use fancy symbols for airline, uncomment the following lines and use a
-" patched font (more info on docs/fancy_symbols.rst)
-if !exists('g:airline_symbols')
-   let g:airline_symbols = {}
-endif
-" let g:airline_left_sep = '⮀'
-" let g:airline_left_alt_sep = '⮁'
-" let g:airline_right_sep = '⮂'
-" let g:airline_right_alt_sep = '⮃'
-" let g:airline_symbols.branch = '⭠'
-" let g:airline_symbols.readonly = '⭤'
-" let g:airline_symbols.linenr = '⭡'
-
 
 let g:python3_host_prog = '/home/pgranger/.pyenv/versions/3.6.5/bin/python'
