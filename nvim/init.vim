@@ -92,6 +92,9 @@ Plug 'fisadev/vim-isort'
 " md preview
 Plug 'shime/vim-livedown'
 
+" eunuch, unix file oprations
+Plug 'tpope/vim-eunuch'
+
 " surround with
 Plug 'tpope/vim-surround'
 
