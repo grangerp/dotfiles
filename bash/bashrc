@@ -264,3 +264,5 @@ if [ $TILIX_ID ] || [ $VTE_VERSION ] ; then source /etc/profile.d/vte.sh; fi # U
 function aws.profile {
     export AWS_DEFAULT_PROFILE=$1
 }
+
+eval "$(direnv hook bash)"

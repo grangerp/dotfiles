@@ -268,7 +268,7 @@ map <F2> :TaskList<CR>
 autocmd! BufWritePost * Neomake
 " open window automatically on run
 let g:neomake_open_list = 2
-let g:neomake_python_enabled_makers = ['flake8', 'mypy']
+let g:neomake_python_enabled_makers = ['flake8', 'mypy', 'vulture']
 
 " Fzf ------------------------------
 
