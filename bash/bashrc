@@ -70,6 +70,7 @@ function docker.clean_images() {
 
 export BASEPROMPT='\n\e${USER_COLOR}\u\
 `activevirtualenv`\
+\e${CYAN_COLOR}${K8S_CONFIG} \
 \e${RED_COLOR}${AWS_DEFAULT_PROFILE} \
 \e${GRAY_COLOR}in \e${GREEN_COLOR}\w\
 \e${GRAY_COLOR}`vcprompt`\
@@ -265,4 +266,12 @@ function aws.profile {
     export AWS_DEFAULT_PROFILE=$1
 }
 
+function k8s.wb.context {
+    export K8S_CONFIG=" ☸️ $1-$2"
+    export KUBECONFIG=~/.kube/k8s-eai-whiskey-bear-$1-$2.conf
+}
+
 eval "$(direnv hook bash)"
+export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
+export MANPATH="/home/linuxbrew/.linuxbrew/share/man:$MANPATH"
+export INFOPATH="/home/linuxbrew/.linuxbrew/share/info:$INFOPATH"
