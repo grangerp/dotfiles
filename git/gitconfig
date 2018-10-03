@@ -2,9 +2,9 @@
   user = grangerp
 
 [user]
-  email = pgranger@elementai.com
+  email = github@grangerp.com
   name = Philippe Granger
-  signingkey = F9CBF87688FF6446
+	signingkey = 49AC9E760E95225D
 
 [color]
   ui = auto
@@ -61,3 +61,8 @@
 	autocorrect = 1
 [commit]
 	gpgsign = true
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
