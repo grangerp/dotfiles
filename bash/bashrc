@@ -270,6 +270,13 @@ function k8s.wb.context {
     export K8S_CONFIG=" ☸️ $1-$2"
     export KUBECONFIG=~/.kube/k8s-eai-whiskey-bear-$1-$2.conf
 }
+KUBECONFIG=~/.kube/config
+for filename in $(find ~/.kube -maxdepth 1 -type f); do
+    if [[ ! "$filename" =~ "kubectx" ]]; then
+        [[ "$KUBECONFIG" =~ "$filename" ]] || KUBECONFIG=$KUBECONFIG:$filename
+    fi
+done
+export KUBECONFIG
 
 eval "$(direnv hook bash)"
 export MANPATH="/home/linuxbrew/.linuxbrew/share/man:$MANPATH"
