@@ -67,10 +67,11 @@ function docker.clean_images() {
     docker rmi $(docker images | grep none | tr -s ' ' | cut -f 3 -d ' ')
 }
 
+source "/home/linuxbrew/.linuxbrew/opt/kube-ps1/share/kube-ps1.sh"
 
 export BASEPROMPT='\n\e${USER_COLOR}\u\
 `activevirtualenv`\
-\e${CYAN_COLOR}${K8S_CONFIG} \
+\e$(kube_ps1) \
 \e${RED_COLOR}${AWS_DEFAULT_PROFILE} \
 \e${GRAY_COLOR}in \e${GREEN_COLOR}\w\
 \e${GRAY_COLOR}`vcprompt`\
@@ -270,8 +271,15 @@ function k8s.wb.context {
     export K8S_CONFIG=" ☸️ $1-$2"
     export KUBECONFIG=~/.kube/k8s-eai-whiskey-bear-$1-$2.conf
 }
+KUBECONFIG=~/.kube/config
+for filename in $(find ~/.kube -maxdepth 1 -type f); do
+    if [[ ! "$filename" =~ "kubectx" ]]; then
+        [[ "$KUBECONFIG" =~ "$filename" ]] || KUBECONFIG=$KUBECONFIG:$filename
+    fi
+done
+export KUBECONFIG
 
 eval "$(direnv hook bash)"
-export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 export MANPATH="/home/linuxbrew/.linuxbrew/share/man:$MANPATH"
 export INFOPATH="/home/linuxbrew/.linuxbrew/share/info:$INFOPATH"
+export PATH='/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin':"$PATH"
