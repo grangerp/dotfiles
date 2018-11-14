@@ -49,9 +49,6 @@ Plug 'ballerina-attic/plugin-vim'
 " A Vim plugin which provides ways of navigating JSON document buffers.
 Plug 'mogelbrod/vim-jsonpath'
 
-" black
-Plug 'ambv/black'
-
 " yapf
 Plug 'google/yapf', { 'rtp': 'plugins/vim', 'for': 'python' }
 
@@ -137,11 +134,6 @@ Plug 'mileszs/ack.vim'
 " Yank history navigation
 Plug 'vim-scripts/YankRing.vim'
 
-" Linters
-Plug 'neomake/neomake'
-" TODO is it running on save? or when?
-" TODO not detecting errors, just style, is it using pylint?
-
 " Theme
 Plug 'trevordmiller/nova-vim'
 
@@ -153,6 +145,16 @@ Plug 'rust-lang/rust.vim'
 
 " golang
 Plug 'fatih/vim-go'
+
+Plug 'w0rp/ale'
+let g:ale_fixers = {'python': ['black', 'isort']}
+let g:ale_fix_on_save = 1
+let g:ale_linters = {'python':['pylint', 'mypy', 'vulture']}
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+" let g:ale_set_loclist = 0
+" let g:ale_set_quickfix = 1
+" let g:ale_list_window_size = 5
+let g:ale_open_list = 1
 
 " Initialize plugin system
 call plug#end()
@@ -246,10 +248,6 @@ autocmd BufWritePre *.py :%s/\s\+$//e
 " Plugins settings and mappings
 " Edit them as you wish.
 
-" Black
-let g:black_linelength = 100
-autocmd BufWritePost *.py execute ':Black'
-
 " Tagbar -----------------------------
 
 " toggle tagbar display
@@ -262,16 +260,8 @@ let g:tagbar_autofocus = 1
 " show pending tasks list
 map <F2> :TaskList<CR>
 
-" Neomake ------------------------------
-
-" Run linter on write
-autocmd! BufWritePost * Neomake
-" open window automatically on run
-let g:neomake_open_list = 2
-let g:neomake_python_enabled_makers = ['flake8', 'mypy', 'vulture']
 
 " Fzf ------------------------------
-
 " file finder mapping
 nmap ,e :Files<CR>
 " tags (symbols) in current file finder mapping
@@ -366,4 +356,4 @@ let g:AutoClosePumvisible = {"ENTER": "\<C-Y>", "ESC": "\<ESC>"}
 let g:yankring_clipboard_monitor = 0
 let g:yankring_history_dir = '~/.config/nvim/'
 
-let g:python3_host_prog = '/home/pgranger/.pyenv/versions/3.6.5/bin/python'
+let g:python3_host_prog = '/home/pgranger/.pyenv/versions/3.7.1/bin/python'
