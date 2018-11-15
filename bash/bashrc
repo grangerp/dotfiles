@@ -71,6 +71,7 @@ source <(helm completion bash)
 
 KUBE_PS1_NS_ENABLE=false
 source "/home/linuxbrew/.linuxbrew/opt/kube-ps1/share/kube-ps1.sh"
+kubeoff
 
 export BASEPROMPT='\n\e${USER_COLOR}\u\
 `activevirtualenv`\
@@ -137,18 +138,6 @@ bind '"\e[B"':history-search-forward
 alias ..='cd ..'
 
 alias edit='$EDITOR $@'
-
-alias pgsql_start='pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start'
-alias pgsql_stop='pg_ctl -D /usr/local/var/postgres stop -s -m fast'
-
-alias glog="git log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(yellow)%d%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
-
-alias scpresume='rsync --partial --progress --progress --stats'
-
-
-function ghettovpn() {
-  $SSHUTTLE_EXECUTABLE -r "$VPN_HOST" 10/8
-}
 
 function cleanswp() {
   find . -name "*.swp" -exec rm -rf {} \;
@@ -279,3 +268,6 @@ if [ -z "$VIRTUAL_ENV" ]; then
     eval "$(pyenv init -)"
     eval "$(pyenv virtualenv-init -)"
 fi
+
+alias k=kubectl
+alias kx=kubectx
