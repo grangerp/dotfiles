@@ -67,11 +67,14 @@ function docker.clean_images() {
     docker rmi $(docker images | grep none | tr -s ' ' | cut -f 3 -d ' ')
 }
 
+source <(helm completion bash)
+
+KUBE_PS1_NS_ENABLE=false
 source "/home/linuxbrew/.linuxbrew/opt/kube-ps1/share/kube-ps1.sh"
 
 export BASEPROMPT='\n\e${USER_COLOR}\u\
 `activevirtualenv`\
-\e$(kube_ps1) \
+$(kube_ps1) \
 \e${RED_COLOR}${AWS_DEFAULT_PROFILE} \
 \e${GRAY_COLOR}in \e${GREEN_COLOR}\w\
 \e${GRAY_COLOR}`vcprompt`\
@@ -181,15 +184,6 @@ if [ -f /usr/local/etc/bash_completion ]; then
   . /usr/local/etc/bash_completion
 fi
 
-# GRC support
-if [ `uname` == "Darwin" ]; then
-  grc_bash="`brew --prefix grc`/etc/grc.bashrc"
-  if [ -e "$grc_bash" ]; then
-    source "$grc_bash"
-  fi;
-fi;
-
-
 [[ -s ~/.rvm/scripts/rvm ]] && source ~/.rvm/scripts/rvm  # This loads RVM into a shell session.
 
 
@@ -240,14 +234,10 @@ function list_stashes(){
 
 export GPG_TTY=$(tty)
 
-export PATH="~/.pyenv/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 export PATH="$HOME/.cargo/bin:$PATH"
-export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
+#export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
 export MANPATH="/home/linuxbrew/.linuxbrew/share/man:$MANPATH"
 export INFOPATH="/home/linuxbrew/.linuxbrew/share/info:$INFOPATH"
 
@@ -261,7 +251,7 @@ export INFOPATH="/home/linuxbrew/.linuxbrew/share/info:$INFOPATH"
 export PATH=$PATH:/home/pgranger/bin
 
 source '/home/pgranger/lib/azure-cli/az.completion'
-if [ $TILIX_ID ] || [ $VTE_VERSION ] ; then source /etc/profile.d/vte.sh; fi # Ubuntu Budgie END
+if [ $TILIX_ID ] || [ $VTE_VERSION ] ; then source /etc/profile.d/vte-2.91.sh; fi # Ubuntu Budgie END
 
 function aws.profile {
     export AWS_DEFAULT_PROFILE=$1
@@ -272,7 +262,7 @@ function k8s.wb.context {
     export KUBECONFIG=~/.kube/k8s-eai-whiskey-bear-$1-$2.conf
 }
 KUBECONFIG=~/.kube/config
-for filename in $(find ~/.kube -maxdepth 1 -type f); do
+for filename in $(find ~/.kube/ -maxdepth 1 -type f); do
     if [[ ! "$filename" =~ "kubectx" ]]; then
         [[ "$KUBECONFIG" =~ "$filename" ]] || KUBECONFIG=$KUBECONFIG:$filename
     fi
