@@ -54,9 +54,6 @@ Plug 'google/yapf', { 'rtp': 'plugins/vim', 'for': 'python' }
 
 Plug 'yuttie/comfortable-motion.vim'
 
-" pomodoro
-Plug 'soywod/vim-keepeye'
-
 " Async autocompletion
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " Completion from other opened files
@@ -82,9 +79,6 @@ set diffopt+=vertical
 
 " enable Gbrowse
 Plug 'tpope/vim-rhubarb'
-
-" Isort
-Plug 'fisadev/vim-isort'
 
 " md preview
 Plug 'shime/vim-livedown'
@@ -148,13 +142,14 @@ Plug 'fatih/vim-go'
 
 Plug 'w0rp/ale'
 let g:ale_fixers = {'python': ['black', 'isort']}
-let g:ale_fix_on_save = 1
-let g:ale_linters = {'python':['pylint', 'mypy', 'vulture']}
+let g:ale_linters = {'python':['pylint', 'mypy']}
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-" let g:ale_set_loclist = 0
-" let g:ale_set_quickfix = 1
-" let g:ale_list_window_size = 5
+let g:ale_fix_on_save = 1
+" only run linter on save
+let g:ale_lint_on_text_changed = 'never'
 let g:ale_open_list = 1
+" used nvim current dir so it use .config files
+let g:ale_python_pylint_change_directory = 0
 
 " Initialize plugin system
 call plug#end()
