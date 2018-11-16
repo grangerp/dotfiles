@@ -71,6 +71,7 @@ source <(helm completion bash)
 
 KUBE_PS1_NS_ENABLE=false
 source "/home/linuxbrew/.linuxbrew/opt/kube-ps1/share/kube-ps1.sh"
+kubeoff # off by default
 
 export BASEPROMPT='\n\e${USER_COLOR}\u\
 `activevirtualenv`\
@@ -95,12 +96,10 @@ export GIT_EDITOR=$EDITOR
 
 export LIBTOOLIZE=glibtoolize
 
-export PATH=~/bin:./node_modules/.bin:$HOME/.rvm/bin:/usr/local/share/npm/bin:/usr/local/go/bin:~/node_modules/.bin:~/pear/bin:~/.bin:/usr/local/bin:/usr/local/sbin:$HOME/Development/go/bin:/home/pgranger/.local/bin:$PATH
-export GOPATH=~/Development/go
+export PATH=/usr/local/share/npm/bin:/usr/local/go/bin:~/.bin:/usr/local/bin:/usr/local/sbin:$HOME/Development/go/bin:/home/pgranger/.local/bin:$PATH
 
 # python
 export PYTHONDONTWRITEBYTECODE=1
-# export PYTHONSTARTUP="$HOME/.pythonrc.py"
 
 # virtualenvwrapper and pip
 if [ `id -u` != '0' ]; then
@@ -191,19 +190,6 @@ export PROMPT="${BASEPROMPT}
 $ "
 export PS1=$PROMPT
 
-NPM_PACKAGES="${HOME}/.npm-packages"
-NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
-PATH="$NPM_PACKAGES/bin:$PATH"
-unset MANPATH # delete if you already modified MANPATH elsewhere in your config
-MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
-
-PATH="/home/pgranger/perl5/bin${PATH+:}${PATH}"; export PATH;
-PERL5LIB="/home/pgranger/perl5/lib/perl5${PERL5LIB+:}${PERL5LIB}"; export PERL5LIB;
-PERL_LOCAL_LIB_ROOT="/home/pgranger/perl5${PERL_LOCAL_LIB_ROOT+:}${PERL_LOCAL_LIB_ROOT}"; export PERL_LOCAL_LIB_ROOT;
-PERL_MB_OPT="--install_base \"/home/pgranger/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=/home/pgranger/perl5"; export PERL_MM_OPT;
-
-
 function docker.clean_containers() {
     docker rm $(docker ps -a | grep -v Up | grep -v CONTAINER | cut -f 1 -d ' ')
 }
@@ -241,26 +227,18 @@ export PATH="$HOME/.cargo/bin:$PATH"
 export MANPATH="/home/linuxbrew/.linuxbrew/share/man:$MANPATH"
 export INFOPATH="/home/linuxbrew/.linuxbrew/share/info:$INFOPATH"
 
-# tabtab source for serverless package
-# uninstall by removing these lines or running `tabtab uninstall serverless`
-[ -f /home/pgranger/.npm-packages/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.bash ] && . /home/pgranger/.npm-packages/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.bash
-# tabtab source for sls package
-# uninstall by removing these lines or running `tabtab uninstall sls`
-[ -f /home/pgranger/.npm-packages/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.bash ] && . /home/pgranger/.npm-packages/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.bash
-
 export PATH=$PATH:/home/pgranger/bin
 
-source '/home/pgranger/lib/azure-cli/az.completion'
+for completion_file in $(brew --prefix)/etc/bash_completion.d/*; do
+    source "$completion_file"
+done
+
 if [ $TILIX_ID ] || [ $VTE_VERSION ] ; then source /etc/profile.d/vte-2.91.sh; fi # Ubuntu Budgie END
 
 function aws.profile {
     export AWS_DEFAULT_PROFILE=$1
 }
 
-function k8s.wb.context {
-    export K8S_CONFIG=" ☸️ $1-$2"
-    export KUBECONFIG=~/.kube/k8s-eai-whiskey-bear-$1-$2.conf
-}
 KUBECONFIG=~/.kube/config
 for filename in $(find ~/.kube/ -maxdepth 1 -type f); do
     if [[ ! "$filename" =~ "kubectx" ]]; then

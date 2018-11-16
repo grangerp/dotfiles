@@ -4,7 +4,7 @@
 [user]
   email = github@grangerp.com
   name = Philippe Granger
-	signingkey = 49AC9E760E95225D
+	signingkey = 4232AF0AC9F3AA21ECB943B093EE99D00D05A72F
 
 [color]
   ui = auto
