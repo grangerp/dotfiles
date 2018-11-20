@@ -121,10 +121,6 @@ Plug 'jeetsukumaran/vim-indentwise'
 " Better language packs
 Plug 'sheerun/vim-polyglot'
 
-" Ack code search (requires ack installed in the system)
-Plug 'mileszs/ack.vim'
-" TODO is there a way to prevent the progress which hides the editor?
-
 " Yank history navigation
 Plug 'vim-scripts/YankRing.vim'
 
@@ -150,6 +146,11 @@ let g:ale_lint_on_text_changed = 'never'
 let g:ale_open_list = 1
 " used nvim current dir so it use .config files
 let g:ale_python_pylint_change_directory = 0
+
+" grepper
+Plug 'mhinz/vim-grepper'
+let g:grepper = {}
+let g:grepper.tools = ['grep', 'git', 'rg']
 
 " Initialize plugin system
 call plug#end()
@@ -219,6 +220,9 @@ set completeopt-=preview
 " autocompletion of files and commands behaves like shell
 " (complete only the common part, list the options that match)
 set wildmode=list:longest
+
+" incremental search/replace
+set inccommand=nosplit
 
 " save as sudo
 ca w!! w !sudo tee "%"
