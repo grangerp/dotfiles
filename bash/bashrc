@@ -19,14 +19,8 @@ else
   USER_COLOR=$ORANGE_COLOR
 fi
 
-VCPROMPT_EXECUTABLE=/usr/local/bin/vcprompt
 SSHUTTLE_EXECUTABLE=/usr/local/bin/sshuttle
 
-function vcprompt() {
-  if [ -e "$VCPROMPT_EXECUTABLE" ]; then
-    $VCPROMPT_EXECUTABLE -f $' on \033[1;34m%n\033[00;1m:\033[0;37m%b\033[32;1m%m%u'
-  fi
-}
 
 function lastcommandfailed() {
   code=$?
@@ -37,27 +31,12 @@ function lastcommandfailed() {
   fi
 }
 
-function backgroundjobs() {
-  jobs|python -c 'if 1:
-    import sys
-    items = ["\033[36;1m%s\033[37;1m" % x.split()[2]
-             for x in sys.stdin.read().splitlines()]
-    if items:
-      if len(items) > 2:
-        string = "%s, and %s" % (", ".join(items[:-1]), items[-1])
-      else:
-        string = ", ".join(items)
-      print("\033[37;1m running %s" % string)
-  '
-}
-
 function activevirtualenv() {
   if [ -n "$VIRTUAL_ENV" ]; then
       echo -n $'\033[00;1m:\033[36;1m'
       echo -n "$(basename $VIRTUAL_ENV)"
   fi
 }
-
 
 function docker.clean_containers() {
 	 docker rm $(docker ps -a | grep -v Up | grep -v CONTAINER | cut -f 1 -d ' ')
@@ -68,18 +47,18 @@ function docker.clean_images() {
 }
 
 source <(helm completion bash)
+source <(kubectl completion bash)
 
 KUBE_PS1_NS_ENABLE=false
-source "/home/linuxbrew/.linuxbrew/opt/kube-ps1/share/kube-ps1.sh"
+source "/home/pgranger/kube-ps1/kube-ps1.sh"
 kubeoff # off by default
 
 export BASEPROMPT='\n\e${USER_COLOR}\u\
 `activevirtualenv`\
 $(kube_ps1) \
+`lastcommandfailed`\
 \e${RED_COLOR}${AWS_DEFAULT_PROFILE} \
 \e${GRAY_COLOR}in \e${GREEN_COLOR}\w\
-\e${GRAY_COLOR}`vcprompt`\
-`backgroundjobs`\
 \e${DEFAULT_COLOR}'
 
 
@@ -96,7 +75,7 @@ export GIT_EDITOR=$EDITOR
 
 export LIBTOOLIZE=glibtoolize
 
-export PATH=/usr/local/share/npm/bin:/usr/local/go/bin:~/.bin:/usr/local/bin:/usr/local/sbin:$HOME/Development/go/bin:/home/pgranger/.local/bin:$PATH
+export PATH=/home/pgranger/go/bin:/usr/local/share/npm/bin:/usr/local/go/bin:~/.bin:/usr/local/bin:/usr/local/sbin:$HOME/Development/go/bin:/home/pgranger/.local/bin:$PATH
 
 # python
 export PYTHONDONTWRITEBYTECODE=1
@@ -211,15 +190,8 @@ export GPG_TTY=$(tty)
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 export PATH="$HOME/.cargo/bin:$PATH"
-#export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
-export MANPATH="/home/linuxbrew/.linuxbrew/share/man:$MANPATH"
-export INFOPATH="/home/linuxbrew/.linuxbrew/share/info:$INFOPATH"
 
 export PATH=$PATH:/home/pgranger/bin
-
-for completion_file in $(brew --prefix)/etc/bash_completion.d/*; do
-    source "$completion_file"
-done
 
 if [ $TILIX_ID ] || [ $VTE_VERSION ] ; then source /etc/profile.d/vte-2.91.sh; fi # Ubuntu Budgie END
 
@@ -236,9 +208,6 @@ done
 export KUBECONFIG
 
 eval "$(direnv hook bash)"
-export MANPATH="/home/linuxbrew/.linuxbrew/share/man:$MANPATH"
-export INFOPATH="/home/linuxbrew/.linuxbrew/share/info:$INFOPATH"
-export PATH='/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin':"$PATH"
 
 if [ -z "$VIRTUAL_ENV" ]; then
     export PATH="~/.pyenv/bin:$PATH"
@@ -246,5 +215,16 @@ if [ -z "$VIRTUAL_ENV" ]; then
     eval "$(pyenv virtualenv-init -)"
 fi
 
-alias k=kubectl
+alias k="kubectl"
 alias kx=kubectx
+alias vi=nvim.appimage
+alias vim=nvim.appimage
+
+export PATH="$HOME/.poetry/bin:$PATH"
+
+
+export PATH=$PATH:$HOME/.linkerd2/bin
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
