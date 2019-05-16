@@ -139,7 +139,8 @@ Plug 'fatih/vim-go'
 Plug 'w0rp/ale'
 let g:ale_fixers = {'python': ['black', 'isort']}
 let g:ale_linters = {'python':['pylint', 'mypy']}
-let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+" let g:ale_linters = {'python':[]}
+let g:ale_echo_msg_format = '[%linter%](%code%) %s [%severity%]'
 let g:ale_fix_on_save = 1
 " only run linter on save
 let g:ale_lint_on_text_changed = 'never'
@@ -147,14 +148,41 @@ let g:ale_open_list = 1
 " used nvim current dir so it use .config files
 let g:ale_python_pylint_change_directory = 0
 
+" let g:ale_linters = {'markdown':['vale']}
+" let g:ale_fixers={'markdown':['prettier']}
+
 " grepper
 Plug 'mhinz/vim-grepper'
 let g:grepper = {}
 let g:grepper.tools = ['grep', 'git', 'rg']
 
+" testing
+Plug 'janko-m/vim-test'
+let test#python#runner = 'pytest'
+let test#strategy = 'dispatch'
+
+Plug 'tpope/vim-dispatch'
+
+" class outline viewer
+Plug 'majutsushi/tagbar'
+
+" Dockerfile highlight + snippets for snipmate
+Plug 'ekalinin/Dockerfile.vim'
+
+" files tree
+Plug 'scrooloose/nerdtree'
+
+" per project config
+Plug 'embear/vim-localvimrc'
+
+" JSON
+Plug 'elzr/vim-json'
+
 " Initialize plugin system
 call plug#end()
 
+" tagbar
+nmap <F8> :TagbarToggle<CR>
 
 " ============================================================================
 " Install plugins the first time vim runs
