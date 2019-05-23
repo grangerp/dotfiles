@@ -52,8 +52,6 @@ Plug 'mogelbrod/vim-jsonpath'
 " yapf
 Plug 'google/yapf', { 'rtp': 'plugins/vim', 'for': 'python' }
 
-Plug 'yuttie/comfortable-motion.vim'
-
 " Async autocompletion
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " Completion from other opened files
@@ -100,9 +98,6 @@ Plug 'Townk/vim-autoclose'
 Plug 'inside/vim-search-pulse'
 
 " Code and files fuzzy finder
-" Plug 'ctrlpvim/ctrlp.vim'
-" Extension to ctrlp, for fuzzy command finder
-" Plug 'fisadev/vim-ctrlp-cmdpalette'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
@@ -177,6 +172,9 @@ Plug 'embear/vim-localvimrc'
 
 " JSON
 Plug 'elzr/vim-json'
+
+" Automatic save session
+Plug 'tpope/vim-obsession'
 
 " Initialize plugin system
 call plug#end()
