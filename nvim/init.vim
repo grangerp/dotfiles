@@ -176,6 +176,9 @@ Plug 'elzr/vim-json'
 " Automatic save session
 Plug 'tpope/vim-obsession'
 
+" need to install shfmt
+Plug 'z0mbix/vim-shfmt', { 'for': 'sh' }
+
 " Initialize plugin system
 call plug#end()
 
@@ -305,10 +308,12 @@ let g:lightline = {
       \ 'colorscheme': 'wombat',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ],
+      \             [ 'obsession' ] ]
       \ },
       \ 'component_function': {
-      \   'gitbranch': 'fugitive#head'
+      \   'gitbranch': 'fugitive#head',
+      \   'obsession': 'ObsessionStatus'
       \ },
       \ }
 
