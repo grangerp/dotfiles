@@ -138,8 +138,8 @@ if [ -e "$HOME/.local-bashrc" ]; then
 fi
 
 # Use git-completion if available
-if [ -e "$HOME/.git-completion.bash" ]; then
-  source "$HOME/.git-completion.bash"
+if [ -e "/usr/share/bash-completion/completions/git" ]; then
+  source "/usr/share/bash-completion/completions/git"
 fi;
 
 # Use bash-completion, if available
@@ -228,3 +228,7 @@ export PATH=$PATH:$HOME/.linkerd2/bin
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+#kubectx and kubens
+export PATH=~/.kubectx:$PATH
+export PATH=$PATH:/home/pgranger/.local/share/tresorit/
