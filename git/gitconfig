@@ -2,9 +2,9 @@
   user = grangerp
 
 [user]
-  email = github@grangerp.com
+  email = pgranger@elementai.com
   name = Philippe Granger
-	signingkey = 49AC9E760E95225D
+	signingkey = ED6EEC832263B88E
 
 [color]
   ui = auto
@@ -38,13 +38,6 @@
   la = log --pretty=format:'%Cgreen%h %Creset %Cred%d%Creset %s %Cblueby %an (%ar)' --graph --all
   ls = ls-files
   lfp = log --pretty=format:'%Cgreen%h %Creset %s %Cblueby %an (%ar) %Cred %d' --graph --first-parent
-	branches = !legit branches
-	publish = !legit publish
-	unpublish = !legit unpublish
-	sync = !legit sync
-	switch = !legit switch
-	resync = !legit resync
-	undo = !legit undo
 
 [hub]
   protocol = https
@@ -66,3 +59,10 @@
 	required = true
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
+[cola]
+	spellcheck = false
+[credential]
+	helper = store
+
+[rerere]
+	enabled = true
