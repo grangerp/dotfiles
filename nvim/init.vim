@@ -132,7 +132,7 @@ Plug 'rust-lang/rust.vim'
 Plug 'fatih/vim-go'
 
 Plug 'w0rp/ale'
-let g:ale_fixers = {'python': ['black', 'isort']}
+let g:ale_fixers = {'python': ['black', 'isort'], 'typescript': ['prettier']}
 let g:ale_linters = {'python':['pylint', 'mypy']}
 " let g:ale_linters = {'python':[]}
 let g:ale_echo_msg_format = '[%linter%](%code%) %s [%severity%]'
@@ -167,6 +167,9 @@ Plug 'ekalinin/Dockerfile.vim'
 " files tree
 Plug 'scrooloose/nerdtree'
 
+" nerdtree git
+Plug 'Xuyuanp/nerdtree-git-plugin'
+
 " per project config
 Plug 'embear/vim-localvimrc'
 
@@ -178,6 +181,17 @@ Plug 'tpope/vim-obsession'
 
 " need to install shfmt
 Plug 'z0mbix/vim-shfmt', { 'for': 'sh' }
+
+" elixir
+Plug 'elixir-editors/vim-elixir'
+
+" Swap window
+" Navigate to the window you'd like to move
+" Press <leader>ww
+" Navigate to the window you'd like to swap with
+" Press <leader>ww again
+Plug 'wesQ3/vim-windowswap'
+
 
 " Initialize plugin system
 call plug#end()

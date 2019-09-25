@@ -79,6 +79,7 @@ export PATH=/home/pgranger/go/bin:/usr/local/share/npm/bin:/usr/local/go/bin:~/.
 
 # python
 export PYTHONDONTWRITEBYTECODE=1
+export PYTHONBREAKPOINT=ipdb.set_trace
 
 # virtualenvwrapper and pip
 if [ `id -u` != '0' ]; then
@@ -232,3 +233,13 @@ export NVM_DIR="$HOME/.nvm"
 #kubectx and kubens
 export PATH=~/.kubectx:$PATH
 export PATH=$PATH:/home/pgranger/.local/share/tresorit/
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[ -f /home/pgranger/.nvm/versions/node/v11.10.1/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.bash ] && . /home/pgranger/.nvm/versions/node/v11.10.1/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.bash
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[ -f /home/pgranger/.nvm/versions/node/v11.10.1/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.bash ] && . /home/pgranger/.nvm/versions/node/v11.10.1/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.bash
+# tabtab source for slss package
+# uninstall by removing these lines or running `tabtab uninstall slss`
+[ -f /home/pgranger/.nvm/versions/node/v11.10.1/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.bash ] && . /home/pgranger/.nvm/versions/node/v11.10.1/lib/node_modules/serverless/node_modules/tabtab/.completions/slss.bash
