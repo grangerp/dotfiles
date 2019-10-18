@@ -220,6 +220,9 @@ alias k="kubectl"
 alias kx=kubectx
 alias vi=nvim.appimage
 alias vim=nvim.appimage
+alias pir="pipenv run"
+alias pirp="pipenv run python"
+alias pirm="pipenv run python manage.py"
 
 export PATH="$HOME/.poetry/bin:$PATH"
 
