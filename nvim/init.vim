@@ -147,6 +147,10 @@ let g:ale_python_pylint_change_directory = 0
 " let g:ale_linters = {'markdown':['vale']}
 " let g:ale_fixers={'markdown':['prettier']}
 
+" Markdown (:TableFormat)
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
+
 " grepper
 Plug 'mhinz/vim-grepper'
 let g:grepper = {}
@@ -210,6 +214,8 @@ let g:go_list_type = "quickfix"
 let g:go_highlight_types = 1
 let g:go_highlight_fields = 1
 let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_build_constraints = 1
 " run :GoBuild or :GoTestCompile based on the go file
 function! s:build_go_files()
   let l:file = expand('%')
@@ -221,6 +227,12 @@ function! s:build_go_files()
 endfunction
 
 autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
+
+let g:ale_linters = {'go':['govet', 'gometalinter']}
+" let g:ale_linters = {'go':[]}
+let g:go_metalinter_enabled = ['vet', 'errcheck']
+let g:go_metalinter_autosave = 1
+let g:go_metalinter_autosave_enabled = ['vet']
 
 " tagbar
 nmap <F8> :TagbarToggle<CR>
